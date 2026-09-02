@@ -1,0 +1,17 @@
+{
+  "findings": [],
+  "schema": {
+    "required": [
+      "type",
+      "target",
+      "prerequisite",
+      "request",
+      "control_request",
+      "observed_difference",
+      "security_boundary_broken",
+      "impact",
+      "confidence"
+    ],
+    "confidence": ["confirmed", "high", "medium", "suspected", "rejected"]
+  }
+}

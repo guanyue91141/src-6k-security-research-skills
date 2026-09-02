@@ -1,0 +1,25 @@
+target:
+  status: queued
+  name: ""
+  scope: ""
+surface:
+  frontend: false
+  api: false
+  authenticated: false
+  object_ids: []
+  upload: false
+  callback: false
+  search: false
+  websocket: false
+  graphql: false
+tested:
+  auth: pending
+  authorization: pending
+  injection: pending
+  ssrf: pending
+  xss: pending
+  upload: pending
+  logic: pending
+  exposure: pending
+findings: []
+next_actions: []
