@@ -20,6 +20,56 @@ REQUIRED_RULES = [f"{index:02d}-{name}.md" for index, name in enumerate([
     "reporting",
     "tool-routing",
 ])]
+BASELINE_KNOWLEDGE = {
+    "401-403-bypass.md",
+    "agent-tool-exec-test.md",
+    "api-gateway-test.md",
+    "authbypass-test.md",
+    "cache-poisoning-test.md",
+    "clickjacking-test.md",
+    "cloud-ide-codex-rce-chain.md",
+    "cors-test.md",
+    "crlf-injection-test.md",
+    "csp-bypass-test.md",
+    "csrf-test.md",
+    "csv-formula-injection-test.md",
+    "dangling-markup-test.md",
+    "dependency-confusion-test.md",
+    "deserialization-test.md",
+    "dns-rebinding-test.md",
+    "el-injection-test.md",
+    "email-header-injection-test.md",
+    "file-upload-test.md",
+    "ghost-bits-cast-test.md",
+    "graphql-test.md",
+    "hpp-test.md",
+    "http-host-header-test.md",
+    "http-smuggling-test.md",
+    "http2-attacks-test.md",
+    "idor-test.md",
+    "info-leak-test.md",
+    "injection-test.md",
+    "insecure-scm-test.md",
+    "jndi-injection-test.md",
+    "js-reverse-guide.md",
+    "llm-security-test.md",
+    "logic-test.md",
+    "oauth-jwt-test.md",
+    "open-redirect-test.md",
+    "path-traversal-lfi-test.md",
+    "prototype-pollution-test.md",
+    "race-condition-test.md",
+    "recon-methodology.md",
+    "ssrf-test.md",
+    "subdomain-takeover-test.md",
+    "type-juggling-test.md",
+    "waf-bypass.md",
+    "websocket-test.md",
+    "xslt-injection-test.md",
+    "xss-test.md",
+    "xxe-test.md",
+    "打穿短表.md",
+}
 
 
 def check_required_files(errors: list[str]) -> None:
@@ -51,8 +101,6 @@ def check_links(errors: list[str]) -> None:
             target = raw.strip().strip("<>").split("#", 1)[0]
             if not target or target.startswith(("http://", "https://", "mailto:", "~", "/")):
                 continue
-            # Ignore inline-code payloads that happen to contain brackets and
-            # links in extracted vendor docs whose source is not bundled.
             if not ("/" in target or target.endswith((".md", ".txt", ".toml", "LICENSE"))):
                 continue
             if target == "LICENSE" and path.parts[-3:-1] == ("mcp-servers", "fofa_MCP"):
@@ -89,11 +137,19 @@ def check_skill_size(errors: list[str]) -> None:
 def check_knowledge_index(errors: list[str]) -> None:
     knowledge = ROOT / "skills/skill/知识库"
     actual = {path.name for path in knowledge.glob("*.md")} - {"README.md"}
-    if len(actual) != 48:
-        errors.append(f"知识库文件数量变化: 期望 48，实际 {len(actual)}")
+    missing = sorted(BASELINE_KNOWLEDGE - actual)
+    if missing:
+        errors.append(f"基线知识文件被删除: {missing}")
+
     readme = (knowledge / "README.md").read_text(encoding="utf-8")
-    if "**合计：48 个知识文件**" not in readme:
-        errors.append("知识库 README 未声明 48 个知识文件")
+    unindexed = sorted(name for name in actual if f"`{name}`" not in readme)
+    if unindexed:
+        errors.append(f"知识库 README 缺少索引: {unindexed}")
+
+    if len(actual) < len(BASELINE_KNOWLEDGE):
+        errors.append(
+            f"知识库文件数量低于基线: 基线 {len(BASELINE_KNOWLEDGE)}，实际 {len(actual)}"
+        )
 
 
 def main() -> int:
@@ -108,7 +164,7 @@ def main() -> int:
         print("结构检查失败:")
         print("\n".join(f"- {error}" for error in errors))
         return 1
-    print("结构检查通过: rules、工作流、知识库、引用、重复文件和入口大小均符合要求。")
+    print("结构检查通过: 基线知识库完整，新增专题已索引，规则、工作流、引用和入口大小均符合要求。")
     return 0
 
 
