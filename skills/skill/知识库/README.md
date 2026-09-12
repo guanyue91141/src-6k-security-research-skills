@@ -25,6 +25,8 @@
 - `http2-attacks-test.md`：升级到 HTTP/2、HTTP/3、协议降级与 parser consistency 审查。
 - `http-desync-modern-2026.md`：补 0.CL、TE.0、TE.TE、Expect、H2/H3→H1、误报控制与防御基线。
 - `llm-security-test.md`：从占位分流升级为 LLM / Agent / RAG / Tool / Memory 安全审查。
+- `deserialization-modern-2026.md`：补 Java ObjectInputFilter/JEP 290/415、Python/.NET/PHP 的现代反序列化治理。
+- `csp-bypass-test.md`：升级为 CSP/Trusted Types 现代防御审查。
 
 ## 文件清单
 
@@ -41,12 +43,13 @@
 | `cloud-ide-codex-rce-chain.md` | 云 IDE/Codex 系审查专题 |
 | `cors-test.md` | CORS 兼容占位/分流 |
 | `crlf-injection-test.md` | CRLF 注入 |
-| `csp-bypass-test.md` | CSP 绕过相关参考 |
+| `csp-bypass-test.md` | CSP / Trusted Types 2026 防御审查 |
 | `csrf-test.md` | CSRF |
 | `csv-formula-injection-test.md` | CSV 公式注入 |
 | `dangling-markup-test.md` | Dangling Markup |
 | `dependency-confusion-test.md` | 依赖混淆 |
-| `deserialization-test.md` | 反序列化 |
+| `deserialization-test.md` | 反序列化历史/兼容知识 |
+| `deserialization-modern-2026.md` | Java/Python/.NET/PHP 反序列化现代安全 overlay |
 | `dns-rebinding-test.md` | DNS Rebinding |
 | `el-injection-test.md` | EL / 表达式注入 |
 | `email-header-injection-test.md` | 邮件头注入 |
@@ -81,4 +84,4 @@
 | `xss-test.md` | XSS |
 | `xxe-test.md` | XXE |
 
-**当前合计：50 个知识文件**（不含本 README），其中原始 48 个为兼容基线，后续允许持续扩展；结构测试会阻止误删基线文件并检查新增专题是否完成索引。
+**当前合计：51 个知识文件**（不含本 README），其中原始 48 个为兼容基线，后续允许持续扩展；结构测试会阻止误删基线文件并检查新增专题是否完成索引。
