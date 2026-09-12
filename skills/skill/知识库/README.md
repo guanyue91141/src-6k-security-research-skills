@@ -35,6 +35,11 @@
 - `cicd-security-review-2026.md`
 - `competition-triage-evidence-2026.md`
 - `agent-skill-supply-chain-2026.md`
+- `mobile-api-apk-discovery-2026.md`
+- `passkey-webauthn-security-2026.md`
+- `business-state-machine-security-2026.md`
+- `spa-source-map-api-recovery-2026.md`
+- `webhook-integrity-2026.md`
 
 ## 完整文件索引
 
@@ -45,6 +50,7 @@ agent-tool-exec-test.md
 api-gateway-test.md
 api-security-review.md
 authbypass-test.md
+business-state-machine-security-2026.md
 cache-modern-2026.md
 cache-poisoning-test.md
 cicd-security-review-2026.md
@@ -82,18 +88,22 @@ js-reverse-guide.md
 k8s-security-review-2026.md
 llm-security-test.md
 logic-test.md
+mobile-api-apk-discovery-2026.md
 nextjs-ssr-security-2026.md
 oauth-jwt-test.md
 open-redirect-test.md
+passkey-webauthn-security-2026.md
 path-traversal-lfi-test.md
 prototype-pollution-test.md
 race-condition-test.md
 recon-methodology.md
 shadow-api-inventory-2026.md
+spa-source-map-api-recovery-2026.md
 ssrf-test.md
 subdomain-takeover-test.md
 type-juggling-test.md
 waf-bypass.md
+webhook-integrity-2026.md
 websocket-test.md
 xslt-injection-test.md
 xss-test.md
@@ -101,4 +111,4 @@ xxe-test.md
 打穿短表.md
 ```
 
-**当前合计：60 个知识文件**（不含本 README）。
+**当前合计：65 个知识文件**（不含本 README）。
