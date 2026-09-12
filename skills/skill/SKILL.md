@@ -11,6 +11,8 @@ description: |
 
 ## 路由
 
+- 明确网安比赛、CTF、靶场或授权固定目标，且要求自动/持续寻找漏洞：读取 `ROUTER.md` → `workflows/competition-auto-hunt.md`，由比赛控制器持续调度候选队列；具体测试仍继承黑盒规则与安全边界。
+
 1. URL、域名、APP 或在线平台：读取 `ROUTER.md` → `workflows/blackbox-src.md`。
 2. 本地源码、GitHub 项目、class/jar：读取 `ROUTER.md` → `workflows/whitebox-audit.md`。
 3. 只给集团/品牌：进入 `workflows/discovery-target.md`，建立种子队列后回到黑盒流程。
