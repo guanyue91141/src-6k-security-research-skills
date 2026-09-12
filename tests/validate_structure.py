@@ -73,6 +73,7 @@ BASELINE_KNOWLEDGE = {
 
 
 def check_required_files(errors: list[str]) -> None:
+    """检查运行时必需文件、规则和工作流入口。"""
     for relative in ["AGENTS.md", "REFACTOR_AUDIT.md", "skills/skill/SKILL.md", "skills/skill/ROUTER.md"]:
         if not (ROOT / relative).is_file():
             errors.append(f"缺少必需文件: {relative}")
@@ -85,6 +86,7 @@ def check_required_files(errors: list[str]) -> None:
 
 
 def check_names(errors: list[str]) -> None:
+    """检查文件名编码以及 rules 运行时目录是否保持精简。"""
     for path in ROOT.rglob("*"):
         if "#U" in path.name:
             errors.append(f"发现编码转义文件名: {path.relative_to(ROOT)}")
@@ -94,6 +96,7 @@ def check_names(errors: list[str]) -> None:
 
 
 def check_links(errors: list[str]) -> None:
+    """检查仓库内 Markdown 相对引用是否仍然有效。"""
     pattern = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
     for path in ROOT.rglob("*.md"):
         text = path.read_text(encoding="utf-8")
@@ -115,6 +118,7 @@ def check_links(errors: list[str]) -> None:
 
 
 def check_duplicates(errors: list[str]) -> None:
+    """避免扩展时把同一份内容重复复制成多个专题。"""
     hashes: dict[str, Path] = {}
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts or path.name == "uv.lock":
@@ -128,13 +132,26 @@ def check_duplicates(errors: list[str]) -> None:
 
 
 def check_skill_size(errors: list[str]) -> None:
+    """入口只负责路由，防止把知识库重新堆回 SKILL.md。"""
     path = ROOT / "skills/skill/SKILL.md"
     lines = path.read_text(encoding="utf-8").splitlines()
     if len(lines) > 120:
         errors.append(f"SKILL.md 仍过长: {len(lines)} 行（上限 120）")
 
 
+def check_modern_metadata(errors: list[str], knowledge: Path, actual: set[str]) -> None:
+    """2026 overlay 必须记录状态与复核日期，便于后续判断是否再次过时。"""
+    modern_files = sorted(name for name in actual if "modern-2026" in name)
+    for name in modern_files:
+        text = (knowledge / name).read_text(encoding="utf-8")
+        if "status:" not in text:
+            errors.append(f"现代专题缺少 status 元数据: {name}")
+        if "last_reviewed:" not in text:
+            errors.append(f"现代专题缺少 last_reviewed 元数据: {name}")
+
+
 def check_knowledge_index(errors: list[str]) -> None:
+    """保证 48 个基线不丢失，并校验新增专题、索引和声明数量。"""
     knowledge = ROOT / "skills/skill/知识库"
     actual = {path.name for path in knowledge.glob("*.md")} - {"README.md"}
     missing = sorted(BASELINE_KNOWLEDGE - actual)
@@ -151,6 +168,17 @@ def check_knowledge_index(errors: list[str]) -> None:
             f"知识库文件数量低于基线: 基线 {len(BASELINE_KNOWLEDGE)}，实际 {len(actual)}"
         )
 
+    # README 中的“当前合计”必须与目录真实数量一致，避免文档长期漂移。
+    declared = re.search(r"\*\*当前合计：(\d+) 个知识文件\*\*", readme)
+    if not declared:
+        errors.append("知识库 README 缺少“当前合计”数量声明")
+    elif int(declared.group(1)) != len(actual):
+        errors.append(
+            f"知识库 README 数量与实际不一致: 声明 {declared.group(1)}，实际 {len(actual)}"
+        )
+
+    check_modern_metadata(errors, knowledge, actual)
+
 
 def main() -> int:
     errors: list[str] = []
@@ -164,7 +192,7 @@ def main() -> int:
         print("结构检查失败:")
         print("\n".join(f"- {error}" for error in errors))
         return 1
-    print("结构检查通过: 基线知识库完整，新增专题已索引，规则、工作流、引用和入口大小均符合要求。")
+    print("结构检查通过: 基线知识库完整，新增专题已索引，现代专题元数据与数量声明一致。")
     return 0
 
 
