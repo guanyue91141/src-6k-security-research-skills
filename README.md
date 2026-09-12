@@ -7,7 +7,7 @@
 ```text
 rules/                    # 00-07 分层运行时规则
 skills/skill/             # 兼容现有安装路径的安全研究技能入口
-skills/skill/知识库/       # 原始 48 个兼容基线 + 持续扩展专题（当前 51 个）
+skills/skill/知识库/       # 原始 48 个兼容基线 + 持续扩展专题（当前 53 个）
 docs/legacy-rules/        # 重构前规则归档，不参与运行时加载
 tests/                    # 结构与回归检查
 mcp-servers/fofa_MCP/     # FOFA MCP 服务（凭证仅从环境变量读取）
@@ -19,8 +19,8 @@ mcp-servers/fofa_MCP/     # FOFA MCP 服务（凭证仅从环境变量读取）
 - 黑盒、白盒、资产发现和测试策略分离，入口技能仅负责路由和按需加载。
 - 所有发现遵循 Evidence-First：`Signal → Hypothesis → Controlled Test → Differential Evidence → Impact → Finding`。
 - 原始 48 个知识专题作为兼容基线完整保留；扩展专题采用“只增不误删”的验证策略，不再被固定数量限制。
-- 新增 `api-security-review.md`、`http-desync-modern-2026.md`、`deserialization-modern-2026.md` 等现代化专题。
-- `http2-attacks-test.md`、`llm-security-test.md`、`csp-bypass-test.md` 已完成 2026 第一轮更新。
+- 新增 `api-security-review.md`、`http-desync-modern-2026.md`、`deserialization-modern-2026.md`、`graphql-modern-2026.md`、`cache-modern-2026.md` 等现代化专题。
+- `http2-attacks-test.md`、`llm-security-test.md`、`csp-bypass-test.md` 等旧专题已开始按 2026 基线更新。
 - `.env`、私钥和密钥类文件默认被 Git 忽略，FOFA 脚本不包含硬编码凭证。
 
 ## 验证
@@ -35,7 +35,9 @@ python3 tests/validate_structure.py
 2. 工作流入口与 Markdown 引用是否有效；
 3. 原始 48 个知识专题是否全部保留；
 4. 新增专题是否已经登记进知识库索引；
-5. 是否存在重复文件或入口文件异常膨胀。
+5. 现代 overlay 是否包含维护元数据；
+6. README 声明数量是否与知识库目录一致；
+7. 是否存在重复文件或入口文件异常膨胀。
 
 ## 本地配置
 
