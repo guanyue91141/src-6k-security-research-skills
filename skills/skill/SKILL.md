@@ -28,6 +28,11 @@ description: |
 15. GitHub Actions、GitLab CI、Jenkins、Runner、OIDC、artifact/cache：加载 `知识库/cicd-security-review-2026.md`。
 16. 比赛/CTF/SRC 时间受限或候选漏洞很多：加载 `知识库/competition-triage-evidence-2026.md`，用 capability delta 和差分证据筛掉假阳性。
 17. 引入第三方 Skill/MCP/rules/install script：先加载 `知识库/agent-skill-supply-chain-2026.md` 做许可证、Prompt、执行代码、依赖与凭据审查。
+18. APK/IPA、移动端接口、deep link、mobile-only API：加载 `知识库/mobile-api-apk-discovery-2026.md`，优先恢复活跃 endpoint，再联动 Shadow API 与 API 授权专题。
+19. Passkey / WebAuthn / 无密码登录 / 凭据注册与恢复：加载 `知识库/passkey-webauthn-security-2026.md`，重点检查 ceremony、账号绑定、RP/origin 与 recovery/fallback。
+20. 支付/第三方事件/Webhook/retry/redelivery：加载 `知识库/webhook-integrity-2026.md`，检查签名、新鲜度、去重、幂等和对象绑定。
+21. 订单、审批、支付、积分、优惠、异步任务等多阶段流程：加载 `知识库/business-state-machine-security-2026.md`，用状态机和不变量检查 Skip/Reorder/Replay/Parallel。
+22. Vite/Next.js/React/Vue/SPA/source map/构建产物分析：加载 `知识库/spa-source-map-api-recovery-2026.md`，恢复 route、API client、schema 和版本线索，再联动对应服务端专题。
 
 ## 不可违反约束
 
