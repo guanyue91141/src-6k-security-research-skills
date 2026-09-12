@@ -18,6 +18,7 @@ description: |
 5. API/接口平台、OpenAPI、REST、微服务接口审查：除对应漏洞专题外，优先加载 `知识库/api-security-review.md` 建立身份—对象—动作—租户—数据模型。
 6. HTTP/2、HTTP/3、代理/网关协议转换、request desync：先加载 `知识库/http2-attacks-test.md` 与 `知识库/http-desync-modern-2026.md`，经典案例再按需打开 `知识库/http-smuggling-test.md`。
 7. LLM、RAG、Agent、工具调用、长期记忆：加载 `知识库/llm-security-test.md`；仅在确认真实工具执行边界后再联动 `知识库/agent-tool-exec-test.md`。
+8. Java/Python/.NET/PHP 反序列化或模型/缓存/队列 artifact：先加载 `知识库/deserialization-modern-2026.md` 判断现代运行时与过滤基线，再按需打开 `知识库/deserialization-test.md` 的历史链与兼容知识。
 
 ## 不可违反约束
 
