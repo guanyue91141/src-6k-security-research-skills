@@ -16,6 +16,8 @@ description: |
 3. 只给集团/品牌：进入 `workflows/discovery-target.md`，建立种子队列后回到黑盒流程。
 4. 明确固定清单：进入 `workflows/scoped-target.md`，只测试范围内资产簇。
 5. API/接口平台、OpenAPI、REST、微服务接口审查：除对应漏洞专题外，优先加载 `知识库/api-security-review.md` 建立身份—对象—动作—租户—数据模型。
+6. HTTP/2、HTTP/3、代理/网关协议转换、request desync：先加载 `知识库/http2-attacks-test.md` 与 `知识库/http-desync-modern-2026.md`，经典案例再按需打开 `知识库/http-smuggling-test.md`。
+7. LLM、RAG、Agent、工具调用、长期记忆：加载 `知识库/llm-security-test.md`；仅在确认真实工具执行边界后再联动 `知识库/agent-tool-exec-test.md`。
 
 ## 不可违反约束
 
@@ -32,6 +34,8 @@ description: |
 进站先打开 `知识库/打穿短表.md`，根据目标特征再打开对应专题。知识库是增强材料，不是能力上限；不得每站通读全部文件。完整清单见 `知识库/README.md`。
 
 新增专题遵循“基线不删、按需扩展”：原始 48 个知识文件作为兼容基线完整保留，新专题必须进入 `知识库/README.md`，并通过 `tests/validate_structure.py` 的索引校验。
+
+知识库采用 `current / mixed / legacy` 三态维护：新标准和当前部署优先读 current；mixed 结合目标版本判断；legacy 只用于旧系统兼容与历史理解，不应作为现代默认方案。
 
 ## 输出
 
