@@ -7,7 +7,7 @@
 ```text
 rules/                    # 00-07 分层运行时规则
 skills/skill/             # 兼容现有安装路径的安全研究技能入口
-skills/skill/知识库/       # 原始 48 个兼容基线 + 持续扩展专题
+skills/skill/知识库/       # 原始 48 个兼容基线 + 持续扩展专题（当前 51 个）
 docs/legacy-rules/        # 重构前规则归档，不参与运行时加载
 tests/                    # 结构与回归检查
 mcp-servers/fofa_MCP/     # FOFA MCP 服务（凭证仅从环境变量读取）
@@ -19,7 +19,8 @@ mcp-servers/fofa_MCP/     # FOFA MCP 服务（凭证仅从环境变量读取）
 - 黑盒、白盒、资产发现和测试策略分离，入口技能仅负责路由和按需加载。
 - 所有发现遵循 Evidence-First：`Signal → Hypothesis → Controlled Test → Differential Evidence → Impact → Finding`。
 - 原始 48 个知识专题作为兼容基线完整保留；扩展专题采用“只增不误删”的验证策略，不再被固定数量限制。
-- 新增 `api-security-review.md`，补强对象级/功能级授权、Mass Assignment、批量与异步任务、Token 生命周期和证据要求。
+- 新增 `api-security-review.md`、`http-desync-modern-2026.md`、`deserialization-modern-2026.md` 等现代化专题。
+- `http2-attacks-test.md`、`llm-security-test.md`、`csp-bypass-test.md` 已完成 2026 第一轮更新。
 - `.env`、私钥和密钥类文件默认被 Git 忽略，FOFA 脚本不包含硬编码凭证。
 
 ## 验证
