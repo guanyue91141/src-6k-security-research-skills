@@ -9,9 +9,22 @@
 - 短表和「注入/SSRF/XSS/RCE」都不是上限。本站过全类型矩阵；四件套打在有差分面上（防空窗），不是只测这四类，也不是每个 path 喷 `'`。有会话时越权/逻辑与四件套同硬
 - 方便和能力优先；省 token 是顺带，不挡开模块
 - 篇内跳转使用本目录真实文件名；与运行时 `rules/` 冲突时以分层规则为准
-- `cors-test.md` / `llm-security-test.md` 保留作兼容与分流，不作为默认实战入口
+- `cors-test.md` 保留作兼容与分流；`llm-security-test.md` 已升级为 2026 LLM/Agent 安全审查入口
 - 正式 SRC 报告统一由 `rules/06-reporting.md` 进入
 - 原始 48 个专题是兼容基线，不得因扩展而删除；新增专题必须在本索引登记
+
+## 2026 现代化状态
+
+- `current`：已按 2025–2026 标准/研究更新，可作为当前主线。
+- `mixed`：主体仍有效，但混有旧协议、旧框架或历史技巧，需要结合版本判断。
+- `legacy`：仅用于兼容旧系统或理解历史攻击面，不应作为现代默认方案。
+- 长篇历史知识原则上不删除；通过 companion/overlay 专题补充新标准，避免重写时丢失实战经验。
+
+已完成第一批：
+
+- `http2-attacks-test.md`：升级到 HTTP/2、HTTP/3、协议降级与 parser consistency 审查。
+- `http-desync-modern-2026.md`：补 0.CL、TE.0、TE.TE、Expect、H2/H3→H1、误报控制与防御基线。
+- `llm-security-test.md`：从占位分流升级为 LLM / Agent / RAG / Tool / Memory 安全审查。
 
 ## 文件清单
 
@@ -41,16 +54,17 @@
 | `ghost-bits-cast-test.md` | Ghost Bits |
 | `graphql-test.md` | GraphQL |
 | `hpp-test.md` | HTTP 参数污染 |
+| `http-desync-modern-2026.md` | HTTP Desync 2026 overlay：0.CL / TE.0 / TE.TE / Expect / H2-H3→H1 |
 | `http-host-header-test.md` | Host Header |
-| `http-smuggling-test.md` | HTTP 请求走私 |
-| `http2-attacks-test.md` | HTTP/2 相关参考 |
+| `http-smuggling-test.md` | HTTP 请求走私经典与实战知识 |
+| `http2-attacks-test.md` | HTTP/2 / HTTP/3 与协议转换安全审查 |
 | `idor-test.md` | 越权 / IDOR / BOLA / BFLA |
 | `info-leak-test.md` | 信息泄露 |
 | `injection-test.md` | 注入总览 |
 | `insecure-scm-test.md` | 不安全源码管理暴露 |
 | `jndi-injection-test.md` | JNDI 注入 |
 | `js-reverse-guide.md` | JS/API 分析 |
-| `llm-security-test.md` | LLM 安全兼容分流 |
+| `llm-security-test.md` | LLM / Agent / RAG / Tool / Memory 2026 安全审查 |
 | `logic-test.md` | 业务逻辑 |
 | `oauth-jwt-test.md` | OAuth/JWT/SAML/OIDC |
 | `open-redirect-test.md` | Open Redirect |
@@ -67,4 +81,4 @@
 | `xss-test.md` | XSS |
 | `xxe-test.md` | XXE |
 
-**当前合计：49 个知识文件**（不含本 README），其中原始 48 个为兼容基线，后续允许持续扩展，但测试会阻止误删基线文件并检查新增专题是否完成索引。
+**当前合计：50 个知识文件**（不含本 README），其中原始 48 个为兼容基线，后续允许持续扩展；结构测试会阻止误删基线文件并检查新增专题是否完成索引。
