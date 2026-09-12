@@ -15,12 +15,19 @@ description: |
 2. 本地源码、GitHub 项目、class/jar：读取 `ROUTER.md` → `workflows/whitebox-audit.md`。
 3. 只给集团/品牌：进入 `workflows/discovery-target.md`，建立种子队列后回到黑盒流程。
 4. 明确固定清单：进入 `workflows/scoped-target.md`，只测试范围内资产簇。
-5. API/接口平台、OpenAPI、REST、微服务接口审查：除对应漏洞专题外，优先加载 `知识库/api-security-review.md` 建立身份—对象—动作—租户—数据模型。
+5. API/接口平台、OpenAPI、REST、微服务接口审查：优先加载 `知识库/api-security-review.md` 建立身份—对象—动作—租户—数据模型。
 6. HTTP/2、HTTP/3、代理/网关协议转换、request desync：先加载 `知识库/http2-attacks-test.md` 与 `知识库/http-desync-modern-2026.md`，经典案例再按需打开 `知识库/http-smuggling-test.md`。
 7. LLM、RAG、Agent、工具调用、长期记忆：加载 `知识库/llm-security-test.md`；仅在确认真实工具执行边界后再联动 `知识库/agent-tool-exec-test.md`。
-8. Java/Python/.NET/PHP 反序列化或模型/缓存/队列 artifact：先加载 `知识库/deserialization-modern-2026.md` 判断现代运行时与过滤基线，再按需打开 `知识库/deserialization-test.md` 的历史链与兼容知识。
+8. Java/Python/.NET/PHP 反序列化或模型/缓存/队列 artifact：先加载 `知识库/deserialization-modern-2026.md`，再按需打开 `知识库/deserialization-test.md`。
 9. GraphQL / Federation / persisted query / subscription：先加载 `知识库/graphql-modern-2026.md`，需要经典测试方法时再打开 `知识库/graphql-test.md`。
-10. CDN、共享缓存、SSR/Edge cache、cache key 或 cache deception：先加载 `知识库/cache-modern-2026.md` 建立 cache/origin normalization 模型，再按需打开 `知识库/cache-poisoning-test.md`。
+10. CDN、共享缓存、SSR/Edge cache、cache key 或 cache deception：先加载 `知识库/cache-modern-2026.md`，再按需打开 `知识库/cache-poisoning-test.md`。
+11. gRPC / Protobuf / gRPC-Web / Connect / grpc-gateway：加载 `知识库/grpc-security-2026.md`，并联动 API 授权与 HTTP/2 专题。
+12. 发现 API 版本漂移、旧 APK/SDK endpoint、deprecated/legacy 接口：加载 `知识库/shadow-api-inventory-2026.md` 做版本与行为差分。
+13. Next.js / React SSR / RSC / Server Actions / ISR：加载 `知识库/nextjs-ssr-security-2026.md`，重点检查服务端授权、序列化数据和缓存边界。
+14. Kubernetes、容器、ServiceAccount、Ingress/service mesh：加载 `知识库/k8s-security-review-2026.md`，默认先做实际权限与信任边界审查。
+15. GitHub Actions、GitLab CI、Jenkins、Runner、OIDC、artifact/cache：加载 `知识库/cicd-security-review-2026.md`。
+16. 比赛/CTF/SRC 时间受限或候选漏洞很多：加载 `知识库/competition-triage-evidence-2026.md`，用 capability delta 和差分证据筛掉假阳性。
+17. 引入第三方 Skill/MCP/rules/install script：先加载 `知识库/agent-skill-supply-chain-2026.md` 做许可证、Prompt、执行代码、依赖与凭据审查。
 
 ## 不可违反约束
 
