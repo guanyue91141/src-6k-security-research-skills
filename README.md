@@ -7,6 +7,7 @@
 ```text
 rules/                    # 00-07 分层运行时规则
 skills/skill/             # 兼容现有安装路径的安全研究技能入口
+skills/skill/workflows/   # 黑盒/白盒/固定范围/比赛自动调度工作流
 skills/skill/知识库/       # 原始 48 个兼容基线 + 持续扩展专题（当前 65 个）
 docs/legacy-rules/        # 重构前规则归档，不参与运行时加载
 tests/                    # 结构与回归检查
@@ -22,8 +23,34 @@ mcp-servers/fofa_MCP/     # FOFA MCP 服务（凭证仅从环境变量读取）
 - 第一轮现代化增加 API、HTTP Desync、GraphQL、Cache、反序列化、LLM/Agent 等专题。
 - 比赛向第二轮新增 gRPC、Shadow API、Next.js/SSR、Kubernetes、CI/CD、候选漏洞证据闸门和 Agent Skill 供应链审查。
 - 第三轮补齐 Mobile API/APK、Passkey/WebAuthn、Webhook 完整性、业务状态机、SPA/source map/API 恢复。
+- 新增 `workflows/competition-auto-hunt.md`，把 Surface Map、候选队列、专题分发、差分验证、时间预算和 Coverage Gate 串成连续比赛工作流。
 - 第三方 Skill 不整包复制；优先检查许可证、抽取增量能力、按本项目架构重写并保留来源元数据。
 - `.env`、私钥和密钥类文件默认被 Git 忽略，FOFA 脚本不包含硬编码凭证。
+
+## 比赛自动模式
+
+用户明确说明这是网安比赛、CTF、靶场或其他授权固定目标，并要求自动/持续寻找漏洞时，入口路由会优先进入：
+
+```text
+workflows/competition-auto-hunt.md
+```
+
+控制器执行：
+
+```text
+Bootstrap
+  → Surface Map
+  → Candidate Queue
+  → Skill Dispatch
+  → Controlled Verify
+  → Evidence Gate
+  → Finding / Reject
+  → Continue
+```
+
+比赛模式不会因为“发现一个漏洞”“一个候选失败”“首页需要登录”或“扫描器没有命中”就自动结束。停止条件只包括用户停止、目标不可达、安全边界、明确时间预算耗尽，或 Coverage Gate 已完成且没有剩余高优先候选。
+
+目标必须位于用户明确授权的比赛/靶场范围内；自动模式仍继承 `rules/01-safety-boundary.md` 的低频、可恢复、最小影响约束。
 
 ## 比赛优先专题
 
