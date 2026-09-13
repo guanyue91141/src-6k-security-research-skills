@@ -85,7 +85,7 @@ def check_required_files(errors: list[str]) -> None:
         "whitebox-audit.md",
         "discovery-target.md",
         "scoped-target.md",
-        "competition-mode.md",
+        "competition-auto-hunt.md",
     ]:
         if not (ROOT / "skills/skill/workflows" / name).is_file():
             errors.append(f"缺少工作流入口: skills/skill/workflows/{name}")
