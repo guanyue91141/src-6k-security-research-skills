@@ -1,41 +1,34 @@
 # Competition Auto Hunt
 
-<!-- Scope: 已明确授权的网安比赛、CTF、SRC 固定目标。Priority: L2。Owns: 持续调度、时间预算、候选队列、专题分发与停止条件。Does Not Own: 具体漏洞验证细节、破坏性动作、报告格式。 -->
+<!-- Scope: 已明确授权的网安比赛、CTF、SRC 固定目标。Priority: L2。Owns: 持续调度、时间预算、候选队列、专题分发与停止条件。Does Not Own: 具体测试细节、破坏性动作、报告格式。 -->
 
 ## 目标
 
-当用户提供一个固定内网域名、URL、IP 或比赛资产并要求自动寻找漏洞时，本工作流把已有知识库串成持续执行循环：
+比赛模式把已有知识库串成一个连续控制器：
 
-`Bootstrap → Surface Map → Dispatch → Controlled Verify → Evidence Gate → Finding/Reject → Continue`
+`Bootstrap → Surface Map → Candidate Queue → Dispatch → Controlled Verify → Evidence Gate → Finding/Reject/Hold → Continue`
 
 核心原则：
 
-- 不因发现一个漏洞而停止；确认后继续覆盖剩余高价值面。
-- 不因一个候选失败而结束目标；失败候选标记 rejected 后转下一个。
-- 不因页面是登录页而认定不可测；继续分析前端构建产物、公开接口、认证边界和可观察协议面。
-- 不把“200、报错、超时、版本号、反射”直接写成漏洞；必须经过差分证据与 capability delta。
-- 全程继承 `rules/01-safety-boundary.md`：低频、可恢复、最小影响，不执行 DoS、批量破坏或真实资损。
+- 不因确认一个 Finding 而停止；继续覆盖不同根因的高价值候选。
+- 不因一个 Candidate 失败而结束目标；Reject 后立即转下一条。
+- 不把登录页、状态码、报错、版本、schema、banner 或单次异常直接写成 Finding。
+- 全程继承 `rules/01-safety-boundary.md` 的范围、可恢复和最小影响要求。
+- 评分只用于排序；最终结论只认差分证据与 Capability Delta。
 
 ## 0. 启动条件
 
-满足以下任一描述即可进入比赛自动模式：
+满足以下任一情况进入本工作流：
 
-- 用户明确说“比赛 / CTF / 靶场 / 授权测试 / 自动找漏洞”；
-- 用户给出固定内网域名、URL 或 IP，并要求连续测试；
-- 用户明确要求“持续测试，不要每一步都停下来问”。
+- 用户明确说比赛、CTF、靶场、SRC 冲榜或授权固定目标；
+- 用户要求持续寻找有效问题，而不是逐步确认；
+- 用户给出明确固定范围并要求在有限时间内提高产出。
 
-固定目标仍然是锁面模式。除非用户给出网段/资产列表，不主动把范围扩展到其他无关主机。
-
-启动后先确认两件可机器验证的事实：
-
-1. Agent 所在运行环境能够解析并访问目标；
-2. 当前目标属于用户给定比赛范围。
-
-无法访问时把状态记为 `blocked`，说明 DNS、路由、TLS 或端口层面的实际阻断，不把网络不可达写成“未发现漏洞”。
+固定目标仍是锁面模式。除非用户给出网段或资产列表，不主动扩展到无关资产。
 
 ## 1. Campaign 状态
 
-比赛模式在任务根 `{名}_dig/state/campaign.yaml` 维护以下状态。字段可扩展，但语义保持稳定：
+任务根维护 `{名}_dig/state/campaign.yaml` 与 `candidate-board.md`：
 
 ```yaml
 mode: competition_auto
@@ -44,9 +37,7 @@ scope:
   roots: []
   locked: true
 budget:
-  total_minutes: null      # 用户没给时间时可为空
-  started_at: null
-  remaining_minutes: null
+  total_minutes: null
 coverage:
   frontend: pending
   api: pending
@@ -61,146 +52,152 @@ candidates:
   active: null
   confirmed: []
   rejected: []
+  hold: []
 next_actions: []
 ```
 
-状态更新规则：
+每个动作至少改变 coverage、candidate 或 next_actions 一项；否则视为空转。
 
-- 每完成一个动作，必须改变 coverage、candidate 或 next_actions 至少一项；否则视为空转。
-- 每个候选都有唯一 ID，例如 `C-001`。
-- 一个候选结束后立即从 `active` 清空，再从队列选择下一项。
-- 已确认 finding 不自动终止 campaign。
+## 2. Surface Map
 
-## 2. 快速 Surface Map
-
-第一轮目标不是“马上喷 payload”，而是在较短时间内建立可搜索攻击面。
-
-至少记录：
+第一轮只建立足够的“可验证面”，不追求一次测完：
 
 - 页面/登录形态、前端框架、SSR/SPA 特征；
-- 主 JS chunk、lazy route、source map 是否存在；
-- REST/OpenAPI、GraphQL、gRPC/gRPC-Web、WebSocket/SSE；
-- 公开与登录后接口、对象 ID、tenant/org/user 等主体字段；
-- 上传、下载、导出、搜索、回调、审批、支付/订单/积分等业务流程；
-- mobile-only/legacy/shadow API 信号；
-- Next.js、Kubernetes、CI/CD、云存储等专项技术信号。
+- 主 JS chunk、lazy route、source map 与客户端 schema；
+- REST/OpenAPI、GraphQL、gRPC、WebSocket/SSE 等接口形态；
+- 对象 ID、user/tenant/org 等主体字段与权限关系；
+- 上传、下载、导出、回调、审批、订单、积分等业务状态；
+- mobile-only、legacy、shadow API 信号；
+- Next.js、CI/CD、Kubernetes、云存储等专项技术信号。
 
-优先调用已有专题：
-
-- SPA/构建产物：`spa-source-map-api-recovery-2026.md`
-- 旧版/隐藏 API：`shadow-api-inventory-2026.md`
-- API 总体：`api-security-review.md`
-- GraphQL：`graphql-modern-2026.md`
-- gRPC：`grpc-security-2026.md`
-- Next.js：`nextjs-ssr-security-2026.md`
-- 业务流程：`business-state-machine-security-2026.md`
-
-Surface Map 结束的判据不是“全部测完”，而是已经有足够信息构建首批候选队列。
+Surface Map 的结束条件：已经能形成首批 Candidate，而不是“所有专题都读完”。
 
 ## 3. Candidate Queue
 
-每个有价值的信号转换成候选对象，而不是立刻叫“漏洞”：
+所有线索先变成 Candidate：
 
 ```yaml
 id: C-001
-class: authorization
-surface: /api/orders/{id}
-signal: other-object-id-observed
-hypothesis: object ownership may not be enforced
-expected_capability_delta: low-privileged user may read another owned object
-control: own-object request
-test: alternate-object request
-confidence: suspected
-priority: 82
-status: queued # queued | active | confirmed | rejected | blocked | deferred
-notes: []
+surface: api/object
+hypothesis: object-boundary-may-be-missing
+attacker: normal-user
+boundary: user-object
+baseline: own-object
+variant: alternate-object
+score: 8
+queue: B
+status: queued
+next_action: build-minimal-differential-control
 ```
 
-### 优先级评分
+### 唯一评分基准：0–12
 
-优先级用于决定“先测哪个”，不代表漏洞严重性。建议 0–100：
+统一使用 `rules/05-testing-policy.md` 的六维评分：
 
-- 预期 capability delta：0–30
-- 当前证据信号强度：0–25
-- 入口可达性与复现成本：0–15
-- 与比赛常见得分面的匹配度：0–15
-- 验证所需时间：0–10（越短分越高）
-- 误报风险：0–5（越低分越高）
+- Boundary：0–2
+- Capability Delta：0–2
+- Evidence：0–2
+- Reproducibility：0–2
+- Impact：0–2
+- Efficiency：0–2
 
-同分优先：授权/业务逻辑 → API/隐藏接口 → 客户端泄露形成的服务端边界 → 协议差异 → 单纯配置暴露。
+队列解释：
 
-## 4. 自动专题分发
+- `9–12` → A：优先闭环；
+- `6–8` → B：补关键证据；
+- `0–5` → C：最小证伪，不投入长链。
 
-根据候选特征加载最少必要专题，不通读全部知识库：
+若旧状态里存在 0–100 priority，只用于兼容展示；重新排序时必须转换回上述六维评分，不再维护第二套权重模型。
+
+## 4. Dispatch
+
+根据目标信号只加载最少必要专题：
 
 | Signal | 优先专题 |
 |---|---|
-| object/user/tenant/order ID | `idor-test.md` + `api-security-review.md` |
+| object/user/tenant/order | `api-security-review.md` + `idor-test.md` |
 | version/legacy/mobile endpoint | `shadow-api-inventory-2026.md` |
-| workflow/order/payment/approval | `business-state-machine-security-2026.md` |
+| workflow/order/approval/积分 | `business-state-machine-security-2026.md` |
 | JS chunk/source map/client schema | `spa-source-map-api-recovery-2026.md` |
 | APK/IPA | `mobile-api-apk-discovery-2026.md` |
 | GraphQL | `graphql-modern-2026.md` |
 | gRPC/protobuf | `grpc-security-2026.md` |
 | Next.js/RSC/Server Actions | `nextjs-ssr-security-2026.md` |
-| OAuth/JWT/session/passkey | `oauth-jwt-test.md` / `passkey-webauthn-security-2026.md` |
+| OAuth/session/passkey | `oauth-jwt-test.md` / `passkey-webauthn-security-2026.md` |
 | webhook/event delivery | `webhook-integrity-2026.md` |
 | upload/object storage | `file-upload-test.md` |
 | cache/CDN/SSR cache | `cache-modern-2026.md` |
-| HTTP/2/3 proxy differential | `http2-attacks-test.md` + `http-desync-modern-2026.md` |
+| HTTP protocol differential | `http2-attacks-test.md` + `http-desync-modern-2026.md` |
 | CI/CD / K8s | `cicd-security-review-2026.md` / `k8s-security-review-2026.md` |
+| AI/Agent | `llm-security-test.md` |
 
-没有匹配专题时回到 `打穿短表.md` 与 `05-testing-policy.md`，而不是凭空发明结论。
+没有匹配专题时回到 `打穿短表.md` 与 `rules/05-testing-policy.md`，不凭空扩展结论。
 
 ## 5. Controlled Verify Loop
 
-每次只激活一个候选，减少上下文和证据混淆：
+每次只激活一个 Candidate：
 
-1. 固定基线：保存正常请求/响应或正常状态变化；
-2. 明确变量：一次只改变一个与假设相关的主体、对象、状态或输入；
-3. 获取差分：比较状态码、主体、对象字段、条数、状态迁移或业务结果；
-4. Capability Delta：回答“攻击者新增了什么原本没有的能力”；
-5. 反证：至少检查一个合理的正常解释，例如缓存、前置解析、公开数据、客户端展示差异；
-6. 裁决：confirmed / rejected / deferred；
-7. 更新 candidate queue，自动转下一个。
+1. 固定基线；
+2. 一次只改变一个与假设相关的主体、对象、状态或输入；
+3. 比较主体、对象字段、条数、状态迁移或业务结果；
+4. 回答 Capability Delta：新增了什么原本没有的能力；
+5. 检查一个合理反证，例如缓存、公开数据、解析层或展示层差异；
+6. 裁决 `confirmed / rejected / hold`；
+7. 更新评分并自动选择下一 Candidate。
 
-正式 finding 仍必须满足 `rules/05-testing-policy.md` 和 `competition-triage-evidence-2026.md`。
+### 两次无增量止损
+
+连续两次受控验证都没有增加以下任一项时，停止当前 Candidate：
+
+- Boundary
+- Capability Delta
+- Evidence
+
+只有新信息改变 Hypothesis 时才允许重新激活，避免沉没成本。
 
 ## 6. 连续执行策略
 
-### 发现漏洞后
+### confirmed
 
-- 立即保存最小充分证据；
-- 不继续扩大影响，不批量读取/修改；
-- 将相关同根因候选合并，避免重复消耗时间；
-- 回到队列，继续下一个不同根因候选。
+- 保存最小充分证据；
+- 合并同根因重复候选；
+- 不扩大影响；
+- 返回队列寻找不同根因 Candidate。
 
-### 候选失败后
+### rejected
 
-- 写入 rejected 原因；
-- 若反证暴露了新攻击面，则生成新的候选；
-- 否则直接继续，不在已证伪路径上反复换 payload。
+记录统一原因，例如：
 
-### 低价值信号
+- `no_boundary_crossed`
+- `no_capability_delta`
+- `false_positive_layering`
+- `expected_behavior`
+- `not_reproducible`
+- `insufficient_evidence`
+- `duplicate_surface`
 
-版本号、banner、单独 source map、单独 introspection、登录页、公开 swagger 本身只作为 Surface Signal；除非能产生新的 capability delta，否则不占用长时间验证。
+然后立即继续。
+
+### hold
+
+用于缺少账号、测试对象、环境条件或需要用户补充授权范围的候选，不与 rejected 混淆。
 
 ## 7. 时间预算
 
-用户没有给时间时，不虚构总时长；只按优先级持续推进。
+用户未给时间时，不虚构总时长，只持续按评分推进。
 
-用户给出明确比赛剩余时间时，可采用动态预算：
+用户给出明确剩余时间时，建议动态分配：
 
-- 前 15%：快速 Surface Map；
-- 中间 55%：高优先候选验证；
-- 后 20%：业务逻辑、Shadow API、客户端恢复等深挖；
-- 最后 10%：复测 confirmed、整理证据和输出。
+- 前 15%：Surface Map；
+- 中间 55%：A/B 队列验证；
+- 后 20%：状态机、Shadow API、客户端恢复等深挖；
+- 最后 10%：复测 confirmed、整理证据与 Coverage Gate。
 
-若早期已经拿到 confirmed finding，后续预算仍优先寻找**不同根因**的第二、第三个漏洞，而不是重复扩大第一个漏洞的影响。
+若早期已有 confirmed，后续仍优先寻找不同根因的第二、第三个高分 Candidate。
 
 ## 8. Coverage Gate
 
-结束前检查：
+结束前至少确认：
 
 ```text
 [ ] frontend / JS / route surface 已建立
@@ -208,38 +205,43 @@ notes: []
 [ ] auth 与 authorization 已形成判定
 [ ] 业务状态机有入口则已检查
 [ ] source-map/mobile/shadow-api 信号有则已跟进
-[ ] GraphQL/gRPC/WebSocket/Next.js 等协议/框架信号有则已分发专题
-[ ] exposure/config 只保留能形成实际边界影响的候选
-[ ] candidate queue 无高优先级未处理项，或剩余项已标 deferred 原因
+[ ] 协议/框架专项信号有则已分发专题
+[ ] 低价值 surface signal 未被误写成 Finding
+[ ] Candidate Queue 无高分未处理项，或剩余项已有 hold/deferred 原因
 ```
 
-Coverage Gate 不表示“目标绝对无漏洞”，只表示本次比赛时间/范围内已完成可解释覆盖。
+Coverage Gate 只表示本次比赛范围与预算内完成了可解释覆盖，不表示“目标绝对无问题”。
 
 ## 9. 停止条件
 
-只有以下情况允许结束自动循环：
+只允许在以下情况结束自动循环：
 
-1. 用户明确要求停止；
-2. 目标持续不可达，且已记录 DNS/网络/服务层证据；
-3. 继续测试会越过 `01-safety-boundary.md`；
-4. 用户给定时间预算耗尽；
-5. Coverage Gate 已满足，且候选队列没有未处理的高优先项。
+1. 用户明确停止；
+2. 目标持续不可达且已有实际阻断证据；
+3. 继续会越过 `rules/01-safety-boundary.md`；
+4. 用户给定预算耗尽；
+5. Coverage Gate 完成且没有未处理的 A 队列 Candidate。
 
-禁止以下“伪停止”：
+以下都不是停止理由：一个 Finding 已确认、一个 Candidate 失败、首页需要登录、自动扫描没有命中、页面缺少明显输入框。
 
-- “发现一个漏洞，所以完成”；
-- “首页需要登录，所以无法测试”；
-- “nuclei 没扫到，所以无漏洞”；
-- “一个候选失败，所以目标安全”；
-- “页面没有明显输入框，所以无攻击面”。
+## 10. 阶段输出
 
-## 10. 对用户的阶段输出
+自动模式只在这些节点主动汇报：
 
-自动模式中减少无意义打断。只在以下节点主动汇报：
-
-- Surface Map 完成并形成首批高优先候选；
-- confirmed finding 出现；
+- Surface Map 完成并形成首批 A/B 队列；
+- confirmed Finding 出现；
 - 目标被网络或安全边界阻塞；
 - Coverage Gate 完成。
 
-普通 rejected 候选只记录到状态文件，不逐条打断用户。
+普通 rejected Candidate 只进入状态板，不逐条打断用户。
+
+## 11. 赛后复盘
+
+统计：
+
+- confirmed Candidate 的初始得分与最早高价值 Signal；
+- 最耗时的 rejected Candidate 及缺失的判定条件；
+- hold Candidate 的缺口；
+- 每个 confirmed 从 Signal 到 Evidence Gate 的动作数。
+
+下一场优先调整评分、路由和假阳性规则，而不是只增加更多知识文件。
