@@ -80,7 +80,13 @@ def check_required_files(errors: list[str]) -> None:
     for name in REQUIRED_RULES:
         if not (ROOT / "rules" / name).is_file():
             errors.append(f"缺少分层规则: rules/{name}")
-    for name in ["blackbox-src.md", "whitebox-audit.md", "discovery-target.md", "scoped-target.md"]:
+    for name in [
+        "blackbox-src.md",
+        "whitebox-audit.md",
+        "discovery-target.md",
+        "scoped-target.md",
+        "competition-mode.md",
+    ]:
         if not (ROOT / "skills/skill/workflows" / name).is_file():
             errors.append(f"缺少工作流入口: skills/skill/workflows/{name}")
 
@@ -168,7 +174,6 @@ def check_knowledge_index(errors: list[str]) -> None:
             f"知识库文件数量低于基线: 基线 {len(BASELINE_KNOWLEDGE)}，实际 {len(actual)}"
         )
 
-    # README 中的“当前合计”必须与目录真实数量一致，避免文档长期漂移。
     declared = re.search(r"\*\*当前合计：(\d+) 个知识文件\*\*", readme)
     if not declared:
         errors.append("知识库 README 缺少“当前合计”数量声明")
