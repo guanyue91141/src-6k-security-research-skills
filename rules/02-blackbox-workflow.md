@@ -6,7 +6,7 @@
 
 - 固定 URL、文档或清单：锁面，只跟随该资产簇的业务 host、子域和 path，不主动扩展到无关集团。
 - 只有品牌/集团：自由跳，进入 `04-target-discovery.md` 的种子闭环。
-- 用户明确说网安比赛、CTF、SRC 冲榜、限时赛或要求尽快产出有效结果：在锁面/自由跳之上启用**比赛模式**，同时加载 `skills/skill/workflows/competition-mode.md` 与 `skills/skill/知识库/competition-triage-evidence-2026.md`。
+- 用户明确说网安比赛、CTF、SRC 冲榜、限时赛或要求尽快产出有效结果：在锁面/自由跳之上启用**比赛模式**，进入 `skills/skill/workflows/competition-auto-hunt.md`，并加载 `skills/skill/知识库/competition-triage-evidence-2026.md`。
 - 已登录目标先建立对象与权限关系；未登录目标先确认关键业务面和认证边界。
 
 ## 进站顺序
