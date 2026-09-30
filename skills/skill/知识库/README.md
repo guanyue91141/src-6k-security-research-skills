@@ -43,72 +43,70 @@
 
 ## 完整文件索引
 
-```text
-401-403-bypass.md
-agent-skill-supply-chain-2026.md
-agent-tool-exec-test.md
-api-gateway-test.md
-api-security-review.md
-authbypass-test.md
-business-state-machine-security-2026.md
-cache-modern-2026.md
-cache-poisoning-test.md
-cicd-security-review-2026.md
-clickjacking-test.md
-cloud-ide-codex-rce-chain.md
-competition-triage-evidence-2026.md
-cors-test.md
-crlf-injection-test.md
-csp-bypass-test.md
-csrf-test.md
-csv-formula-injection-test.md
-dangling-markup-test.md
-dependency-confusion-test.md
-deserialization-modern-2026.md
-deserialization-test.md
-dns-rebinding-test.md
-el-injection-test.md
-email-header-injection-test.md
-file-upload-test.md
-ghost-bits-cast-test.md
-graphql-modern-2026.md
-graphql-test.md
-grpc-security-2026.md
-hpp-test.md
-http-desync-modern-2026.md
-http-host-header-test.md
-http-smuggling-test.md
-http2-attacks-test.md
-idor-test.md
-info-leak-test.md
-injection-test.md
-insecure-scm-test.md
-jndi-injection-test.md
-js-reverse-guide.md
-k8s-security-review-2026.md
-llm-security-test.md
-logic-test.md
-mobile-api-apk-discovery-2026.md
-nextjs-ssr-security-2026.md
-oauth-jwt-test.md
-open-redirect-test.md
-passkey-webauthn-security-2026.md
-path-traversal-lfi-test.md
-prototype-pollution-test.md
-race-condition-test.md
-recon-methodology.md
-shadow-api-inventory-2026.md
-spa-source-map-api-recovery-2026.md
-ssrf-test.md
-subdomain-takeover-test.md
-type-juggling-test.md
-waf-bypass.md
-webhook-integrity-2026.md
-websocket-test.md
-xslt-injection-test.md
-xss-test.md
-xxe-test.md
-打穿短表.md
-```
+- `401-403-bypass.md`
+- `agent-skill-supply-chain-2026.md`
+- `agent-tool-exec-test.md`
+- `api-gateway-test.md`
+- `api-security-review.md`
+- `authbypass-test.md`
+- `business-state-machine-security-2026.md`
+- `cache-modern-2026.md`
+- `cache-poisoning-test.md`
+- `cicd-security-review-2026.md`
+- `clickjacking-test.md`
+- `cloud-ide-codex-rce-chain.md`
+- `competition-triage-evidence-2026.md`
+- `cors-test.md`
+- `crlf-injection-test.md`
+- `csp-bypass-test.md`
+- `csrf-test.md`
+- `csv-formula-injection-test.md`
+- `dangling-markup-test.md`
+- `dependency-confusion-test.md`
+- `deserialization-modern-2026.md`
+- `deserialization-test.md`
+- `dns-rebinding-test.md`
+- `el-injection-test.md`
+- `email-header-injection-test.md`
+- `file-upload-test.md`
+- `ghost-bits-cast-test.md`
+- `graphql-modern-2026.md`
+- `graphql-test.md`
+- `grpc-security-2026.md`
+- `hpp-test.md`
+- `http-desync-modern-2026.md`
+- `http-host-header-test.md`
+- `http-smuggling-test.md`
+- `http2-attacks-test.md`
+- `idor-test.md`
+- `info-leak-test.md`
+- `injection-test.md`
+- `insecure-scm-test.md`
+- `jndi-injection-test.md`
+- `js-reverse-guide.md`
+- `k8s-security-review-2026.md`
+- `llm-security-test.md`
+- `logic-test.md`
+- `mobile-api-apk-discovery-2026.md`
+- `nextjs-ssr-security-2026.md`
+- `oauth-jwt-test.md`
+- `open-redirect-test.md`
+- `passkey-webauthn-security-2026.md`
+- `path-traversal-lfi-test.md`
+- `prototype-pollution-test.md`
+- `race-condition-test.md`
+- `recon-methodology.md`
+- `shadow-api-inventory-2026.md`
+- `spa-source-map-api-recovery-2026.md`
+- `ssrf-test.md`
+- `subdomain-takeover-test.md`
+- `type-juggling-test.md`
+- `waf-bypass.md`
+- `webhook-integrity-2026.md`
+- `websocket-test.md`
+- `xslt-injection-test.md`
+- `xss-test.md`
+- `xxe-test.md`
+- `打穿短表.md`
 
 **当前合计：65 个知识文件**（不含本 README）。

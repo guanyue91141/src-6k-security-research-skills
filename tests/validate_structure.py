@@ -116,7 +116,7 @@ def check_links(errors: list[str]) -> None:
                 continue
             if target.startswith("'/") or target.startswith('"/'):
                 continue
-            if "docs/user-guide/" in str(path) and target.startswith("../internal/"):
+            if "docs/user-guide" in path.as_posix() and target.startswith("../internal/"):
                 continue
             candidate = (path.parent / target).resolve()
             if not candidate.is_file():
