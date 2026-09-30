@@ -1,7 +1,25 @@
-# Clickjacking / Framing 安全背景（2026）
+---
+id: clickjacking
+title: Clickjacking 与嵌框防护
+category: client
+status: mixed
+last_reviewed: 2026-09
+purpose: 审查页面是否需要被第三方嵌入，以及敏感界面的 framing 防护匹配度。
+triggers:
+- X-Frame-Options
+- frame-ancestors
+- 嵌框
+- iframe
+inputs:
+- 敏感页面
+outputs:
+- 嵌框证据或 N/A
+related:
+- csrf-test.md
+- csp-bypass-test.md
+---
 
-> status: mixed  
-> last_reviewed: 2026-09
+# Clickjacking / Framing 安全背景（2026）
 
 单独缺少 framing 防护头不直接作为高价值结论。本专题用于审查页面是否需要被第三方嵌入，以及敏感界面是否具有与其风险相匹配的浏览器防护。
 

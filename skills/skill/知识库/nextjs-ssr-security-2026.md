@@ -1,8 +1,26 @@
 ---
+id: nextjs-ssr-security
+title: Next.js/React SSR 安全
+category: platform
 status: current
 last_reviewed: 2026-09
+purpose: 审查 RSC、Server Actions、SSR/ISR 与缓存边界中的服务端授权与序列化数据。
+triggers:
+- Next.js
+- RSC
+- Server Actions
+- SSR
+- ISR
+- React
+inputs:
+- Next.js 应用与构建产物
+outputs:
+- SSR 侧授权/数据 Finding
+related:
+- cache-modern-2026.md
+- spa-source-map-api-recovery-2026.md
 sources:
-  - murrtada/bug-bounty-agent-skills:hunt-nextjs
+- murrtada/bug-bounty-agent-skills:hunt-nextjs
 ---
 
 # Next.js / React SSR 安全审查 2026

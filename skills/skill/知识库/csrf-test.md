@@ -1,7 +1,29 @@
+---
+id: csrf
+title: CSRF 与跨站写
+category: client
+status: mixed
+last_reviewed: 2026-09
+purpose: 证明跨用户或敏感写成功；扫码登录 CSRF 见本文对应章节。
+triggers:
+- CSRF
+- token
+- 跨站写
+- 扫码登录
+inputs:
+- 状态变更接口
+- 可用会话
+outputs:
+- 跨站写证据
+related:
+- authbypass-test.md
+- clickjacking-test.md
+---
+
 # csrf
 
 > **SRC 纪律：** 本文测 **CSRF 写成功** 等仍可作中高（有跨用户/敏感写才报）。  
-> 文中出现的 CORS 仅作链路基座理解；**禁止**把 CORS 单独写成主洞报告（`cors-vuln-report-priority`：不挖不写）。
+> 文中出现的 CORS 仅作链路基座理解；**禁止**把 CORS 单独写成主洞报告（`rules/01-safety-boundary.md`：不挖不写）。
 
 # CSRF — Cross-Site Request Forgery
 

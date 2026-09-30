@@ -1,3 +1,27 @@
+---
+id: oauth-jwt
+title: OAuth/JWT/SAML 令牌与断言安全
+category: auth
+status: mixed
+last_reviewed: 2026-09
+purpose: 审查 JWT 算法与密钥、OAuth 授权流与 SAML 断言的可伪造与越权点。
+triggers:
+- JWT
+- OAuth
+- OIDC
+- SAML
+- access_token
+- 断言
+inputs:
+- 令牌样例
+- 授权端点
+outputs:
+- 令牌伪造/越权证据
+related:
+- authbypass-test.md
+- api-security-review.md
+---
+
 > 结构：上半原有是主线（JWT / OAuth / SAML）；下半补充按 api-auth / jwt-oauth / oidc / saml 加深。标题搜即可。
 >
 > 跨域读 token：SRC 不挖 CORS，**勿开** `cors-test.md`。有跨站写走 `csrf-test.md`，有越权读走 `idor-test.md`。

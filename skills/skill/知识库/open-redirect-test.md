@@ -1,3 +1,22 @@
+---
+id: open-redirect
+title: 开放重定向
+category: client
+status: legacy
+last_reviewed: 2026-09
+purpose: 覆盖重定向参数未校验导致的钓鱼或令牌窃取。
+triggers:
+- redirect
+- returnUrl
+- 跳转参数
+inputs:
+- 跳转参数
+outputs:
+- 重定向证据或 N/A
+related:
+- oauth-jwt-test.md
+---
+
 # open-redirect
 
 # Open Redirect

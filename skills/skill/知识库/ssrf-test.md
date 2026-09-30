@@ -1,3 +1,24 @@
+---
+id: ssrf
+title: SSRF 与服务端请求伪造
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖内网探测、云元数据路径差异与过滤绕过。
+triggers:
+- url 参数
+- callback
+- 云元数据
+- GOPROXY
+inputs:
+- 可控 URL 参数
+outputs:
+- SSRF 读取/带外证据
+related:
+- xxe-test.md
+- file-upload-test.md
+---
+
 > 短表「云厂商元数据路径差」「公开 GOPROXY」用标题搜。英文补充/附件已砍；云元数据路径差和绕过仍在上半。
 
 ## 一、原有知识库

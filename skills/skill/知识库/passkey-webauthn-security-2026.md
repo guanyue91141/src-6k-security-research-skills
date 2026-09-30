@@ -1,10 +1,27 @@
 ---
+id: passkey-webauthn
+title: Passkey/WebAuthn 安全审查
+category: auth
 status: current
 last_reviewed: 2026-09
+purpose: 审查 ceremony、账号绑定、RP/origin 校验与 recovery/fallback 设计缺陷。
+triggers:
+- Passkey
+- WebAuthn
+- 无密码登录
+- 凭据注册
+- recovery
+inputs:
+- WebAuthn 流程抓包
+outputs:
+- 绑定/绕过证据或 N/A
+related:
+- authbypass-test.md
+- oauth-jwt-test.md
 sources:
-  - https://www.w3.org/TR/webauthn-3/
-  - https://fidoalliance.org/passkeys/
-  - https://fidoalliance.org/white-paper-displace-password-otp-authentication-with-passkeys/
+- https://www.w3.org/TR/webauthn-3/
+- https://fidoalliance.org/passkeys/
+- https://fidoalliance.org/white-paper-displace-password-otp-authentication-with-passkeys/
 ---
 
 # Passkey / WebAuthn Security 2026

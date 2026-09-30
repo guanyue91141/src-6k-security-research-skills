@@ -1,6 +1,27 @@
+---
+id: js-reverse-guide
+title: JS 逆向与接口挖掘
+category: recon
+status: mixed
+last_reviewed: 2026-09
+purpose: 从前端 JS 中恢复隐藏路由、加密参数、盐与演示账号。
+triggers:
+- 加密参数
+- 前端 JS
+- hidden 路由
+- 密文 ID
+inputs:
+- JS chunk 列表
+outputs:
+- 接口清单
+- 参数与密钥线索
+related:
+- spa-source-map-api-recovery-2026.md
+---
+
 # JS 逆向配合接口挖掘指南
 
-> 进站强制步骤见 `dig-scope` §4.1：**不只抽 `/api/` path**。盐、密文 id 公钥、hidden/admin 路由、写死的演示号有就进清单，没有写「无」。演示号当钥匙，不是登录框字典。
+> 进站强制步骤见 `rules/02-blackbox-workflow.md`：**不只抽 `/api/` path**。盐、密文 id 公钥、hidden/admin 路由、写死的演示号有就进清单，没有写「无」。演示号当钥匙，不是登录框字典。
 
 ## 使用场景
 

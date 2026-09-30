@@ -1,8 +1,25 @@
-# GraphQL 现代安全基线（2026）
+---
+id: graphql-modern
+title: GraphQL 现代基线（Federation/Persisted Query）
+category: access
+status: current
+last_reviewed: 2026-09
+purpose: graphql-test.md 的现代 companion，覆盖 Federation、persisted query、subscription 与 schema 生命周期。
+triggers:
+- Federation
+- persisted query
+- subscription
+- 复杂度控制
+inputs:
+- GraphQL 端点与 schema
+outputs:
+- 现代部署边界 Finding
+related:
+- graphql-test.md
+baseline: GraphQL September 2025 Specification
+---
 
-> status: current  
-> last_reviewed: 2026-09  
-> baseline: GraphQL September 2025 Specification
+# GraphQL 现代安全基线（2026）
 
 本专题作为 `graphql-test.md` 的现代化 companion。旧文件中的 introspection、字段授权、批量查询等知识继续保留；现代部署还需要覆盖 Federation、persisted query、subscription、复杂度控制与 schema 生命周期。
 

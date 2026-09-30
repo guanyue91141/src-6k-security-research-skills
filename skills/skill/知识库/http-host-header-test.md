@@ -1,4 +1,25 @@
-> 短表「Host 毒重置信」在 §2 下，用标题搜即可。有重置/激活口就打 Host / XFH（`dig-scope` §4.2.2），不必先看见邮件长什么样。没这类口，不要拿随机页空改 Host 来勾表。
+---
+id: http-host-header
+title: Host 头注入与路由滥用
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 Host/XFH 污染导致的密码重置投毒与路由欺骗。
+triggers:
+- Host
+- X-Forwarded-Host
+- 密码重置
+- 缓存键
+inputs:
+- 重置或激活入口
+outputs:
+- 投毒链路证据
+related:
+- cache-poisoning-test.md
+- http-smuggling-test.md
+---
+
+> 短表「Host 毒重置信」在 §2 下，用标题搜即可。有重置/激活口就打 Host / XFH（`rules/05-testing-policy.md`），不必先看见邮件长什么样。没这类口，不要拿随机页空改 Host 来勾表。
 
 # http-host-header
 
@@ -24,7 +45,7 @@ The Host header is used by web applications and infrastructure for:
 
 ### Host 毒重置信（短表有指针）
 
-认：清单有重置 / 激活 / 邀请发信口（`dig-scope` §4.2.2）。不必先看见邮件里是不是用 Host 拼的。
+认：清单有重置 / 激活 / 邀请发信口（`rules/05-testing-policy.md`）。不必先看见邮件里是不是用 Host 拼的。
 
 打：
 

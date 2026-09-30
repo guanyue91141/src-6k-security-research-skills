@@ -1,3 +1,24 @@
+---
+id: jndi-injection
+title: JNDI 注入
+category: injection
+status: legacy
+last_reviewed: 2026-09
+purpose: 覆盖 JNDI lookup 经 RMI/LDAP 触发远程类加载的链路。
+triggers:
+- JNDI
+- RMI
+- LDAP
+- lookup
+inputs:
+- 可控 lookup 目标
+outputs:
+- 注入链路证据或 N/A
+related:
+- deserialization-test.md
+- el-injection-test.md
+---
+
 # jndi-injection
 
 # JNDI Injection

@@ -1,9 +1,27 @@
 ---
+id: webhook-integrity
+title: Webhook 完整性与重放
+category: logic
 status: current
 last_reviewed: 2026-09
+purpose: 检查签名、新鲜度、去重、幂等与业务对象绑定。
+triggers:
+- webhook
+- callback
+- 签名
+- 重放
+- 幂等
+- 支付回调
+inputs:
+- 回调端点与签名算法
+outputs:
+- 完整性/重放证据
+related:
+- business-state-machine-security-2026.md
+- api-security-review.md
 sources:
-  - https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
-  - https://docs.stripe.com/webhooks
+- https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries
+- https://docs.stripe.com/webhooks
 ---
 
 # Webhook Integrity 2026

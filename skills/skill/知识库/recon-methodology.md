@@ -1,10 +1,35 @@
+---
+id: recon-methodology
+title: 资产测绘与侦察节奏
+category: recon
+status: mixed
+last_reviewed: 2026-09
+purpose: 定义自由跳/锁面下的种子闭环、FOFA 限流与去噪节奏，避免把扫描量当进度。
+triggers:
+- 资产发现
+- 种子队列
+- FOFA
+- 子域枚举
+- 测绘
+inputs:
+- 根域或品牌名
+- 用户授权范围
+outputs:
+- 种子队列
+- 存活资产清单
+- 状态更新
+related:
+- spa-source-map-api-recovery-2026.md
+- js-reverse-guide.md
+---
+
 # recon-and-methodology
 
-> **测绘节奏只认** `dig-scope` §1.0.1 / §2.1：只搜**当前这一个**种子；本种子剩余活面没挖完禁止新搜。认到短表形态只打当前站，禁止拿 Morph 去全网 FOFA。优质根域只回灌，本种子挖完才搜。
+> **测绘节奏只认** `rules/04-target-discovery.md` / §2.1：只搜**当前这一个**种子；本种子剩余活面没挖完禁止新搜。认到短表形态只打当前站，禁止拿 Morph 去全网 FOFA。优质根域只回灌，本种子挖完才搜。
 >
 > **全量 nuclei 不当进度。** nuclei 只在需要已知 CVE / 暴露面（actuator、swagger、已知中间件）时辅助；禁止把「全量模板扫一遍」当本站矩阵。
 >
-> 调搜用 MCP `fofa`（`fofa__get_alerts`），不要自己 curl。Key 在 `~/.grok/config.toml` `[mcp_servers.fofa.env]`：主号 → backup → backup2，`fofa.py` 遇 429/820041 自动切。限流闸认 `dig-scope` §2.1.4。**禁止**把 email / key 写进本文件或对话。
+> 调搜用 MCP `fofa`（`fofa__get_alerts`），不要自己 curl。Key 在 `config.toml` 的 `[mcp_servers.fofa.env]`（安装后为 `~/.grok/config.toml`）：主号 → backup → backup2，`fofa.py` 遇 429/820041 自动切。限流闸认 `rules/04-target-discovery.md`。**禁止**把 email / key 写进本文件或对话。
 
 ### FOFA 最短语法（备忘，不是开场）
 
@@ -24,7 +49,7 @@ status_code="200"
 组合 && ；排除 !=
 ```
 
-Quake / 凤鸟只补**当前种子**缺口，不当开场必跑。语法对照与 ROI 过滤见下文各节；过滤仍服从 `dig-scope` 去废 / 去非存活 / 股权闸。
+Quake / 凤鸟只补**当前种子**缺口，不当开场必跑。语法对照与 ROI 过滤见下文各节；过滤仍服从 `rules/02-blackbox-workflow.md` 去废 / 去非存活 / 股权闸。
 
 # Recon and Methodology
 
@@ -220,7 +245,7 @@ https://target.com/backup.zip
 
 ## 7. ZSEANO'S TESTING METHODOLOGY
 
-> **节奏不听本节。** 自由跳 / 一种子 / 力气先砸哪认 `dig-scope` + `src-value` §1.1。本节只当：参数怎么想、错误页/旧版本/移动端 API 别漏。命令和思路仍用。
+> **节奏不听本节。** 自由跳 / 一种子 / 力气先砸哪认 `rules/02-blackbox-workflow.md` + `src-value` §1.1。本节只当：参数怎么想、错误页/旧版本/移动端 API 别漏。命令和思路仍用。
 
 ### Core Philosophy
 1. **Go deep on one program** rather than spread across many — learn the application thoroughly
@@ -254,7 +279,7 @@ For each input point:
 
 ## 8. BUG BOUNTY PROGRAM TRIAGE (WHERE TO SPEND TIME)
 
-> **节奏不听本节。** 自由跳种子/换站认 `dig-scope`；力气先砸哪认 `src-value` §1.1。下面 Priority 不是第二套测绘，也不是 SRC 定级。命令和参数思路仍用。
+> **节奏不听本节。** 自由跳种子/换站认 `rules/02-blackbox-workflow.md`；力气先砸哪认 `src-value` §1.1。下面 Priority 不是第二套测绘，也不是 SRC 定级。命令和参数思路仍用。
 
 ### High-Value Target Selection
 ```
@@ -296,7 +321,7 @@ cat subdomains.txt | nuclei -t exposures/ -t misconfiguration/ -o exposed.txt
 ## 10. COMMON MISCONFIGURATIONS (QUICK WINS)
 
 ```
-□ CORS: SRC 永久跳过（不挖不写；见 cors-vuln-report-priority）— 勿当 quick win
+□ CORS: SRC 永久跳过（不挖不写；见 `rules/01-safety-boundary.md`）— 勿当 quick win
 □ S3 bucket public: curl https://target.s3.amazonaws.com/
 □ Directory listing: response contains "Index of /"
 □ .git exposed: curl https://target.com/.git/config

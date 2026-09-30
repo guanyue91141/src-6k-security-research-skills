@@ -1,7 +1,24 @@
-# CSV / Spreadsheet 导出安全（2026）
+---
+id: csv-formula-injection
+title: CSV/表格导出公式注入
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 审查报表/工单/通讯录导出中单元格内容被电子表格应用解释的风险。
+triggers:
+- CSV 导出
+- Excel
+- 公式注入
+- 报表
+inputs:
+- 导出接口
+outputs:
+- 公式注入证据或 N/A
+related:
+- info-leak-test.md
+---
 
-> status: mixed  
-> last_reviewed: 2026-09
+# CSV / Spreadsheet 导出安全（2026）
 
 CSV 公式注入不是默认高价值问题，但企业报表、工单、财务和通讯录导出仍应考虑电子表格应用对单元格内容的解释方式。
 

@@ -1,7 +1,30 @@
+---
+id: cloud-ide-codex-rce-chain
+title: 云 IDE/AI 编程平台弱口令到 RCE 链
+category: platform
+status: mixed
+last_reviewed: 2026-09
+purpose: 记录弱口令、危险 RPC 与容器/集群凭证链的组合路径。
+triggers:
+- 云 IDE
+- Codex
+- 编程台
+- RPC
+- 弱口令
+- 容器凭证
+inputs:
+- 云 IDE 平台入口
+outputs:
+- RCE 链路证据
+related:
+- k8s-security-review-2026.md
+- agent-tool-exec-test.md
+---
+
 # 云 IDE / Codex 系 AI 编程平台：弱口令→Root RCE→凭证链
 
 > 类型：认证缺陷 + 危险 RPC + 容器/集群凭证链  
-> 写不写只认 `vuln-report-format.md`。短表指针用标题搜。
+> 写不写只认 `rules/06-reporting.md`。短表指针用标题搜。
 
 ---
 
@@ -60,7 +83,7 @@ curl -sk -X POST "https://HOST/codex-api/rpc" \
 
 ### 2.2 弱口令（登录）
 
-只打**当前站**这形态控制台的裸默认口（`dig-scope` §4.1.1：登录表单字典不当必做）。一眼：
+只打**当前站**这形态控制台的裸默认口（`rules/02-blackbox-workflow.md`.1：登录表单字典不当必做）。一眼：
 
 ```bash
 curl -sk -X POST "https://HOST/tenant-api/login" \
@@ -133,7 +156,7 @@ curl -sk -X POST "https://HOST/codex-api/rpc" \
 
 ## 4. 资产怎么找
 
-**只打当前站。** 认到 `/tenant-api/login`、`/codex-api/rpc` 就在本 host 打 §2，禁止认到就新开种子、FOFA 全网同皮（hunt-iter 开场；`dig-scope` 一种子闭环）。优质根域只回灌，本种子剩余活面挖完才搜。
+**只打当前站。** 认到 `/tenant-api/login`、`/codex-api/rpc` 就在本 host 打 §2，禁止认到就新开种子、FOFA 全网同皮（`rules/05-testing-policy.md` 开场；`rules/04-target-discovery.md`）。优质根域只回灌，本种子剩余活面挖完才搜。
 
 下面语句**仅当本任务本种子已经是 Codex / 编程台这条**时，用来翻本种子结果，不是认到同框架就另开工厂：
 
@@ -175,7 +198,7 @@ body="@openai/codex" || body="command/exec"
 | RCE | `POST /codex-api/rpc` `command/exec` → root |
 | 环境 | 计算面 Pod；集群 API 内网 |
 | 链上资产 | 模型 Key、SA token、邀请码、宽 RPC |
-| 写不写 | 只认 `vuln-report-format.md`。DEV 是否收录看 SRC 口径；有 prod 同构更稳 |
+| 写不写 | 只认 `rules/06-reporting.md`。DEV 是否收录看 SRC 口径；有 prod 同构更稳 |
 
 复现骨架（HOST / SESSION 换成当前站实值）：
 

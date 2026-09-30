@@ -1,3 +1,25 @@
+---
+id: path-traversal-lfi
+title: 路径穿越与本地文件包含
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 file= 穿越、Nginx alias 缺斜杠等读取与包含链。
+triggers:
+- file 参数
+- 路径穿越
+- alias
+- LFI
+- 静态前缀
+inputs:
+- 文件读取参数
+outputs:
+- 读取/包含证据
+related:
+- api-gateway-test.md
+- file-upload-test.md
+---
+
 > 短表「Nginx alias 缺斜杠」在 §22 下，用标题搜即可。站上已有 `/static` `/assets` `/img` 就可以打 `/static../`，不必先看见配置缺斜杠。没有这类前缀，走普通 `file=` 穿越，不要为了勾表空打。
 
 # path-traversal-lfi

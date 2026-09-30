@@ -1,9 +1,25 @@
 ---
+id: competition-triage-evidence
+title: 比赛候选筛选与差分证据
+category: method
 status: current
 last_reviewed: 2026-09
+purpose: 用 capability delta 与差分证据筛掉假阳性，支撑时间受限下的候选排序。
+triggers:
+- 比赛
+- CTF
+- 时间受限
+- 候选队列
+- 假阳性
+inputs:
+- 候选列表与已有证据
+outputs:
+- 候选排序与裁决
+related:
+- 打穿短表.md
 sources:
-  - MoonFuji/invariant-first-bug-bounty
-  - murrtada/bug-bounty-agent-skills:triage-validation
+- MoonFuji/invariant-first-bug-bounty
+- murrtada/bug-bounty-agent-skills:triage-validation
 ---
 
 # 网安比赛 / SRC 候选漏洞证据闸门 2026

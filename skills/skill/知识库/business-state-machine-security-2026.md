@@ -1,10 +1,28 @@
 ---
+id: business-state-machine
+title: 业务状态机与不变量审查
+category: logic
 status: current
 last_reviewed: 2026-09
+purpose: 用状态机与不变量检查 Skip/Reorder/Replay/Parallel 型流程缺陷。
+triggers:
+- 订单
+- 审批
+- 支付
+- 积分
+- 异步任务
+- 多阶段流程
+inputs:
+- 状态迁移定义与请求序列
+outputs:
+- 不变量破坏证据
+related:
+- logic-test.md
+- race-condition-test.md
 sources:
-  - https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/10-Business_Logic_Testing/06-Testing_for_the_Circumvention_of_Work_Flows/
-  - https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/10-Business_Logic_Testing/
-  - https://portswigger.net/web-security/logic-flaws
+- https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/10-Business_Logic_Testing/06-Testing_for_the_Circumvention_of_Work_Flows/
+- https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/10-Business_Logic_Testing/
+- https://portswigger.net/web-security/logic-flaws
 ---
 
 # Business State Machine Security 2026

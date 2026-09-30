@@ -1,6 +1,27 @@
+---
+id: cache-poisoning
+title: Web 缓存投毒与欺骗（经典）
+category: platform
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 unkeyed header 投毒与 cache deception 经典手法。
+triggers:
+- 缓存
+- X-Cache
+- CDN
+- unkeyed
+- 缓存欺骗
+inputs:
+- 缓存层与缓存键
+outputs:
+- 投毒/欺骗证据
+related:
+- cache-modern-2026.md
+---
+
 > 结构：上半原有是主线（unkeyed / 欺骗）；下半补充 + 文末附件加深。先确认缓存键再打投毒。短表「缓存欺骗偷会话页」在原有「四、Web 缓存欺骗」下，用标题搜即可。
 >
-> 写不写只认 `~/.grok/rules/vuln-report-format.md`。只探到缓存键、没有投毒/偷会话 → 继续跟投毒/偷会话。有会话个人页/账单/`/api/me` 就可以打后缀，不必先看见 `X-Cache`。没这类页，不要为了勾表空加 `.css`。
+> 写不写只认 `rules/06-reporting.md`。只探到缓存键、没有投毒/偷会话 → 继续跟投毒/偷会话。有会话个人页/账单/`/api/me` 就可以打后缀，不必先看见 `X-Cache`。没这类页，不要为了勾表空加 `.css`。
 
 ## 一、原有知识库
 

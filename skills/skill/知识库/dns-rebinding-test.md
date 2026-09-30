@@ -1,7 +1,24 @@
-# DNS Rebinding / Local Service 边界（2026）
+---
+id: dns-rebinding
+title: DNS Rebinding 与本地服务边界
+category: protocol
+status: mixed
+last_reviewed: 2026-09
+purpose: 浏览器访问本地服务、设备管理页或内网 WebUI 时的按需参考。
+triggers:
+- DNS rebinding
+- 本地服务
+- 内网 WebUI
+- 设备管理页
+inputs:
+- 本地或内网服务入口
+outputs:
+- 边界证据或 N/A
+related:
+- ssrf-test.md
+---
 
-> status: mixed  
-> last_reviewed: 2026-09
+# DNS Rebinding / Local Service 边界（2026）
 
 DNS Rebinding 不作为默认独立专题；在浏览器访问本地服务、设备管理页、开发工具或内网 WebUI 时按需参考。
 

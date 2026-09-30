@@ -1,8 +1,25 @@
 ---
+id: k8s-security-review
+title: Kubernetes/容器安全审查
+category: platform
 status: current
 last_reviewed: 2026-09
+purpose: 审查 RBAC、ServiceAccount、workload identity 与容器边界。
+triggers:
+- Kubernetes
+- k8s
+- ServiceAccount
+- RBAC
+- service mesh
+inputs:
+- 集群配置与工作负载
+outputs:
+- 权限与信任边界 Finding
+related:
+- cicd-security-review-2026.md
+- cloud-ide-codex-rce-chain.md
 sources:
-  - murrtada/bug-bounty-agent-skills:hunt-k8s
+- murrtada/bug-bounty-agent-skills:hunt-k8s
 ---
 
 # Kubernetes / Container 安全审查 2026

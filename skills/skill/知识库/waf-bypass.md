@@ -1,3 +1,23 @@
+---
+id: waf-bypass
+title: WAF 绕过手法
+category: method
+status: legacy
+last_reviewed: 2026-09
+purpose: 历史规避手法汇编，仅确认存在 WAF 且需验证绕过时按需参考。
+triggers:
+- WAF
+- 拦截
+- 绕过
+- 编码混淆
+inputs:
+- 被拦截的请求
+outputs:
+- 绕过证据或 N/A
+related:
+- ghost-bits-cast-test.md
+---
+
 # waf-bypass
 
 # WAF Bypass Techniques — Evasion Playbook

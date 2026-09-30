@@ -1,3 +1,24 @@
+---
+id: ghost-bits-cast
+title: Ghost Bits / Cast Attack（Java char 收窄）
+category: injection
+status: legacy
+last_reviewed: 2026-09
+purpose: 记录 Java 字符窄化导致的 WAF/校验绕过与走私公式。
+triggers:
+- char 收窄
+- Ghost Bits
+- WAF 绕过
+- Java 编码
+inputs:
+- 受限触发路径
+outputs:
+- 绕过证据或 N/A
+related:
+- waf-bypass.md
+- crlf-injection-test.md
+---
+
 # ghost-bits-cast-attack
 
 # Ghost Bits / Cast Attack — Java char to byte Narrowing Playbook

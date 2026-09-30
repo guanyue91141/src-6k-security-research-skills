@@ -1,8 +1,25 @@
 ---
+id: agent-skill-supply-chain
+title: Agent Skill/Prompt 供应链审查
+category: platform
 status: current
 last_reviewed: 2026-09
+purpose: 审查引入的第三方 Skill/MCP/rules 的许可证、Prompt、执行代码、依赖与凭据。
+triggers:
+- 第三方 Skill
+- MCP
+- install script
+- 供应链
+- prompt 注入
+inputs:
+- 待引入的 Skill 或插件包
+outputs:
+- 供应链风险清单
+related:
+- dependency-confusion-test.md
+- cicd-security-review-2026.md
 sources:
-  - theinfosecguy/razin
+- theinfosecguy/razin
 ---
 
 # Agent Skill / Prompt Supply Chain 安全审查 2026

@@ -1,3 +1,24 @@
+---
+id: prototype-pollution
+title: 原型链污染
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 Node 深合并污染与打到模板 RCE 的 gadget 链。
+triggers:
+- __proto__
+- 深合并
+- Node
+- gadget
+inputs:
+- 可控 JSON 或合并入口
+outputs:
+- 污染扩散或 RCE 证据
+related:
+- injection-test.md
+- deserialization-test.md
+---
+
 > 短表「PP 打到模板 RCE」在后半「来源专题：prototype-pollution-advanced」下，用标题搜即可。主场是 Node 深合并；别的栈 JSON 也能合就仍可探一枪，gadget 对不上丢掉，不是禁打。
 
 # prototype-pollution

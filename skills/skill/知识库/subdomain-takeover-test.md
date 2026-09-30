@@ -1,3 +1,24 @@
+---
+id: subdomain-takeover
+title: 子域接管检测与验证
+category: recon
+status: legacy
+last_reviewed: 2026-09
+purpose: 判定 CNAME 悬空与第三方服务释放后子域可被接管的证据。
+triggers:
+- CNAME 悬空
+- 三方服务 404
+- 未绑定域名
+- 云服务默认页
+inputs:
+- 子域列表
+- DNS 记录
+outputs:
+- 接管证据或 N/A
+related:
+- recon-methodology.md
+---
+
 # subdomain-takeover
 
 # Subdomain Takeover — Detection & Exploitation Playbook

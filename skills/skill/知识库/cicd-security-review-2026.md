@@ -1,9 +1,27 @@
 ---
+id: cicd-security-review
+title: CI/CD 流水线安全审查
+category: platform
 status: current
 last_reviewed: 2026-09
+purpose: 审查 GitHub Actions/GitLab CI/Jenkins、OIDC、Runner 与 artifact/cache 的信任边界。
+triggers:
+- GitHub Actions
+- GitLab CI
+- Jenkins
+- OIDC
+- Runner
+- artifact
+inputs:
+- 流水线配置
+outputs:
+- 供应链/权限 Finding
+related:
+- agent-skill-supply-chain-2026.md
+- dependency-confusion-test.md
 sources:
-  - murrtada/bug-bounty-agent-skills:hunt-cicd
-  - GitHub Actions security hardening guidance
+- murrtada/bug-bounty-agent-skills:hunt-cicd
+- GitHub Actions security hardening guidance
 ---
 
 # CI/CD / GitHub Actions / Build Pipeline 安全审查 2026

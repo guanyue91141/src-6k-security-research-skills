@@ -1,3 +1,25 @@
+---
+id: api-gateway
+title: API 网关规范化绕过
+category: access
+status: legacy
+last_reviewed: 2026-09
+purpose: 记录网关与后端路径/编码规范化不一致导致的鉴权绕过历史手法。
+triggers:
+- API 网关
+- 路径规范化
+- 鉴权绕过
+- 路径穿越前缀
+inputs:
+- 网关路由规则
+- 受限路径
+outputs:
+- 规范化绕过证据或 N/A
+related:
+- path-traversal-lfi-test.md
+- api-security-review.md
+---
+
 # API 网关安全测试手册
 
 ## 一、路径规范化绕过
@@ -500,4 +522,3 @@ kr scan https://target.com -w routes.txt
 # 使用 Assetnote 词表
 kr scan https://target.com -A=apiroutes-210228
 ```
-

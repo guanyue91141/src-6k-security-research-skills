@@ -1,7 +1,25 @@
-# HTTP Desync 现代化补充（2026）
+---
+id: http-desync-modern
+title: HTTP Desync 现代化补充（2026）
+category: protocol
+status: current
+last_reviewed: 2026-09
+purpose: http-smuggling-test.md 的现代 companion，聚焦 2024-2026 协议边界与代理解析差异。
+triggers:
+- desync
+- 代理
+- HTTP/1.1 上游
+- 协议转换
+inputs:
+- 代理拓扑
+outputs:
+- desync 边界 Finding
+related:
+- http-smuggling-test.md
+- http2-attacks-test.md
+---
 
-> status: current  
-> last_reviewed: 2026-09
+# HTTP Desync 现代化补充（2026）
 
 本专题用于补充 `http-smuggling-test.md` 的经典 CL.TE / TE.CL 内容。重点是 2024–2026 的协议边界与代理解析差异，不提供批量化利用步骤。
 

@@ -1,8 +1,28 @@
-# LLM / Agent 安全审查（2026）
+---
+id: llm-security
+title: LLM/Agent 应用安全审查
+category: platform
+status: current
+last_reviewed: 2026-09
+purpose: 关注模型输出是否跨越身份、数据、工具或执行边界，而非越狱本身。
+triggers:
+- LLM
+- RAG
+- Agent
+- MCP
+- 工具调用
+- 长期记忆
+inputs:
+- AI 应用与工具清单
+outputs:
+- 边界跨越证据
+related:
+- agent-tool-exec-test.md
+- agent-skill-supply-chain-2026.md
+scope: LLM 应用、RAG、Agent、工具调用、MCP、长期记忆
+---
 
-> status: current  
-> last_reviewed: 2026-09  
-> scope: LLM 应用、RAG、Agent、工具调用、MCP、长期记忆
+# LLM / Agent 安全审查（2026）
 
 本专题不把“聊天越狱成功”本身当作高价值漏洞。真正需要关注的是模型输出是否跨越了身份、数据、工具或执行边界。
 

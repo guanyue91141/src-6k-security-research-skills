@@ -1,7 +1,24 @@
-# CSP / Trusted Types 安全审查（2026）
+---
+id: csp-bypass
+title: CSP/Trusted Types 架构审查
+category: client
+status: current
+last_reviewed: 2026-09
+purpose: 作为 XSS 防御架构审查使用，不作为独立主漏洞类型。
+triggers:
+- CSP
+- Trusted Types
+- nonce
+- script-src
+inputs:
+- 响应头与页面模板
+outputs:
+- 防御架构评估
+related:
+- xss-test.md
+---
 
-> status: current  
-> last_reviewed: 2026-09
+# CSP / Trusted Types 安全审查（2026）
 
 单独“绕过 CSP”不作为本项目的主漏洞类型；本文件用于 XSS 防御架构审查，并与 `xss-test.md` 联动。
 

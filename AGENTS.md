@@ -23,6 +23,18 @@
 - 越权优先读/列表差分；写验证只操作可复原的自有测试对象。禁止真实资损、批量破坏、改动他人密码/角色和登出用户会话。
 - CORS 永久不挖；不要打开 `skills/skill/知识库/cors-test.md`。
 
+## 知识库维护
+
+`skills/skill/知识库/registry.yaml` 是专题元数据的唯一来源，文件 frontmatter 由它同步生成。新增或修改专题：
+
+```text
+在 registry.yaml 登记
+  → python3 tests/sync_knowledge_meta.py
+  → python3 tests/validate_structure.py
+```
+
+物理文件名保持扁平一层不变（兼容移交脚本与 `打穿短表.md` 裸文件名指针）。专题检索走 `打穿短表.md` → `知识库/README.md` → `registry.yaml`，禁止在入口文件堆积专题清单。
+
 ## 任务落盘
 
 新任务按 `{目标}_SRC挖洞/` 建立 `README.md`、`资产/`、`js/`、`报告/` 和 `{名}_dig/`，状态放 `{名}_dig/state/`。自由跳任务必须有 `资产/种子队列.md`，严格执行一种子闭环。

@@ -1,10 +1,28 @@
 ---
+id: spa-source-map-api-recovery
+title: SPA/Source Map/构建产物 API 恢复
+category: recon
 status: current
 last_reviewed: 2026-09
+purpose: 从 Vite/Next.js 构建产物与 source map 恢复 route、API client、schema 与版本线索。
+triggers:
+- source map
+- Vite
+- SPA
+- 构建产物
+- client schema
+inputs:
+- 前端 JS 与 .map 文件
+outputs:
+- route/API 清单
+- schema 线索
+related:
+- js-reverse-guide.md
+- shadow-api-inventory-2026.md
 sources:
-  - https://vite.dev/config/build-options
-  - https://nextjs.org/docs/pages/api-reference/config/next-config-js/productionBrowserSourceMaps
-  - https://developer.chrome.com/docs/devtools/developer-resources
+- https://vite.dev/config/build-options
+- https://nextjs.org/docs/pages/api-reference/config/next-config-js/productionBrowserSourceMaps
+- https://developer.chrome.com/docs/devtools/developer-resources
 ---
 
 # SPA / Source Map / API Recovery 2026

@@ -1,8 +1,33 @@
+---
+id: authbypass
+title: 认证绕过与认证链缺陷
+category: auth
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖会话、重置、改绑、换票、2FA 与扫码登录的认证链缺陷。
+triggers:
+- 登录页
+- SSO
+- 验证码
+- 2FA
+- 找回密码
+- 换绑手机
+inputs:
+- 认证入口
+- 可用会话
+outputs:
+- 认证绕过证据或 N/A
+related:
+- oauth-jwt-test.md
+- 401-403-bypass.md
+- csrf-test.md
+---
+
 # authbypass-authentication-flaws
 
-打开是登录页 / SSO → 表单壳听 `dig-scope` §4.1.1：找业务面；别按本文件从头跑字典 / 验证码 / 无限试密。  
-发会话、重置、改绑、换票、2FA 按本文件 + `dig-scope` §4.2.2 探针打，不要因为 §4.1.1 整摊跳过。表是每站下限，不是只准打这几枪。  
-中间件裸默认口可一眼。滑块 / 发码 / 没进号的试密 → 转认证链，别停半截。写不写只认 `vuln-report-format.md`。
+打开是登录页 / SSO → 表单壳听 `rules/02-blackbox-workflow.md`.1：找业务面；别按本文件从头跑字典 / 验证码 / 无限试密。  
+发会话、重置、改绑、换票、2FA 按本文件 + `rules/05-testing-policy.md` 探针打，不要因为 §4.1.1 整摊跳过。表是每站下限，不是只准打这几枪。  
+中间件裸默认口可一眼。滑块 / 发码 / 没进号的试密 → 转认证链，别停半截。写不写只认 `rules/06-reporting.md`。
 英文字典/验证码 20 法/重置矩阵已砍；短表指针用标题搜。Host 毒重置见 `http-host-header-test.md`。扫码登录 CSRF 见 `csrf-test.md` §18。
 
 # Authentication Bypass
@@ -318,4 +343,3 @@
 算成：进已有商家号且出手机（能当这个号用）。
 
 假点：空串只出游客空号。密钥实值、某次 Cookie 不进库。单站没中不删短表这行。
-

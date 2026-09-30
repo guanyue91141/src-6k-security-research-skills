@@ -1,7 +1,26 @@
-# 邮件生成与 Header 安全（2026）
+---
+id: email-header-injection
+title: 邮件生成与 Header 安全
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 审查账号恢复/邀请/通知系统中地址、显示名与 transport header 的边界。
+triggers:
+- 邮件
+- 邀请
+- 账号恢复
+- header 注入
+- 多租户邮件
+inputs:
+- 邮件相关接口
+outputs:
+- 注入证据或 N/A
+related:
+- http-host-header-test.md
+- authbypass-test.md
+---
 
-> status: mixed  
-> last_reviewed: 2026-09
+# 邮件生成与 Header 安全（2026）
 
 传统邮件头注入优先级较低，但账号恢复、邀请、通知和多租户邮件系统仍需要正确区分地址、显示名、主题、正文与 transport header。
 

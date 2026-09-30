@@ -1,3 +1,24 @@
+---
+id: deserialization
+title: 不安全反序列化（经典）
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 Java/PHP/Python/.NET 反序列化的识别与利用链。
+triggers:
+- 反序列化
+- serialized
+- gadget
+- pickle
+inputs:
+- 序列化数据包
+outputs:
+- 反序列化利用证据
+related:
+- deserialization-modern-2026.md
+- jndi-injection-test.md
+---
+
 # deserialization
 
 # Insecure Deserialization

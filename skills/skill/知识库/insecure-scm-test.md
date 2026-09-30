@@ -1,3 +1,24 @@
+---
+id: insecure-scm
+title: 暴露的 SCM 与构建产物
+category: recon
+status: legacy
+last_reviewed: 2026-09
+purpose: 发现 .git/.svn/.DS_Store 等仓库泄漏并评估可读范围。
+triggers:
+- .git
+- .svn
+- .DS_Store
+- 源码泄漏
+inputs:
+- 目标路径
+outputs:
+- 可读仓库证据
+- 敏感文件线索
+related:
+- info-leak-test.md
+---
+
 # insecure-scm
 
 # Insecure Source Code Management

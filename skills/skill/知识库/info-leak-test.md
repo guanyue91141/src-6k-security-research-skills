@@ -1,4 +1,27 @@
-> 写不写只认 `~/.grok/rules/vuln-report-format.md`。本篇测：版本/框架/health/无账密壳/指纹 → 继续挖完整账密、密钥、跨主体业务数据。抄到账密/云密钥/token：须假值对照，认钥枪带出身份或列表，再打不影响线上的只读例才交；手机号加解密钥不写。
+---
+id: info-leak
+title: 信息泄露与凭证暴露
+category: recon
+status: mixed
+last_reviewed: 2026-09
+purpose: 从响应、错误页、health、静态资源中提取密钥、账号与跨主体数据，并过认钥闸。
+triggers:
+- health
+- actuator
+- 调试信息
+- 版本指纹
+- 硬编码密钥
+inputs:
+- 接口清单
+- 响应样例
+outputs:
+- 经认钥闸的凭证 Finding 或 N/A
+related:
+- api-security-review.md
+- 401-403-bypass.md
+---
+
+> 写不写只认 `rules/06-reporting.md`。本篇测：版本/框架/health/无账密壳/指纹 → 继续挖完整账密、密钥、跨主体业务数据。抄到账密/云密钥/token：须假值对照，认钥枪带出身份或列表，再打不影响线上的只读例才交；手机号加解密钥不写。
 > 结构：本篇较短，可整篇开。中间件端口见了再打（§五），不是每站先扫端口。
 
 # 信息泄露测试手册
@@ -241,7 +264,7 @@ curl -X POST "https://target.com/graphql" \
 
 ## 五、中间件端口见了怎么打
 
-> **见了才打。** 不是每站先 nmap 全端口。FOFA/进站/响应头已经露出这些端口或控制台，再按表走。打穿了按 `vuln-report-format` 落盘；health/版本壳继续跟账密，不要停在 PONG。
+> **见了才打。** 不是每站先 nmap 全端口。FOFA/进站/响应头已经露出这些端口或控制台，再按表走。打穿了按 `rules/06-reporting.md` 落盘；health/版本壳继续跟账密，不要停在 PONG。
 
 | 见什么 | 打哪 | 出什么算成 | 假点 / 转哪 |
 |--------|------|------------|-------------|

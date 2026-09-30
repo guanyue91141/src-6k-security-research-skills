@@ -1,4 +1,27 @@
-> 进站勾完标准见 `dig-scope` §4.2.1：能看出条数/内容变化的口，每个过滤参都测；只回「请登录」整段 N/A。按栈选探针（JSON/Mongo 操作符、搜索框 ES、Java HQL/SpEL、有模板 SSTI；SQL 面仍走引号/布尔/延时）。405 后换位置不只有换编码。
+---
+id: injection
+title: 注入类测试（SQL/命令/SSTI）
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 按栈选择探针（SQL 引号/布尔/延时、命令、模板 SSTI、搜索 ES/HQL/SpEL）。
+triggers:
+- SQL 注入
+- 命令注入
+- SSTI
+- 参数过滤
+- '405'
+inputs:
+- 可控参数
+- 回显或时间差异
+outputs:
+- 注入差分证据
+related:
+- ssrf-test.md
+- xss-test.md
+---
+
+> 进站勾完标准见 `rules/05-testing-policy.md`：能看出条数/内容变化的口，每个过滤参都测；只回「请登录」整段 N/A。按栈选探针（JSON/Mongo 操作符、搜索框 ES、Java HQL/SpEL、有模板 SSTI；SQL 面仍走引号/布尔/延时）。405 后换位置不只有换编码。
 > 短表「列表筛选项 OR + total」「邮件订阅 iframe 同目录 list」用标题搜。WooYun 统计 / sqlmap --os-shell / 反弹 shell / 英文附件已砍；现场按栈自己变，不靠教材。
 
 # 注入类漏洞测试手册（SQL注入 / 命令注入 / SSTI）

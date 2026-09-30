@@ -1,6 +1,28 @@
+---
+id: race-condition
+title: 竞态条件
+category: logic
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖支付/券/库存竞态，含 HTTP/2 单包与 Turbo Intruder 手法。
+triggers:
+- 竞态
+- 并发
+- 单包
+- 库存超卖
+- 券重复
+inputs:
+- 并发敏感接口
+outputs:
+- 竞态证据
+related:
+- logic-test.md
+- business-state-machine-security-2026.md
+---
+
 > 结构：上半原有是主线（支付/券/库存）；下半补充加深（HTTP/2 单包、Turbo Intruder）。支付/券竞态先看原有，单包手法再开补充。
 >
-> 与 `src-value-hunting` 冲突时以 rules 为准。验证码并发只为打通登录/改密才报；纯短信轰炸不写。
+> 与 `rules/06-reporting.md` 冲突时以 rules 为准。验证码并发只为打通登录/改密才报；纯短信轰炸不写。
 
 ## 一、原有知识库
 

@@ -1,3 +1,24 @@
+---
+id: xxe
+title: XXE 外部实体注入
+category: injection
+status: legacy
+last_reviewed: 2026-09
+purpose: 覆盖经典实体注入、带外读取与文件/SSRF 影响。
+triggers:
+- XML 解析
+- DOCTYPE
+- 实体
+- 文件读取
+inputs:
+- XML 接口
+outputs:
+- XXE 读取/带外证据
+related:
+- ssrf-test.md
+- xslt-injection-test.md
+---
+
 # xxe
 
 # XML External Entity Injection (XXE)

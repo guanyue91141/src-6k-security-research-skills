@@ -1,9 +1,26 @@
 ---
+id: shadow-api-inventory
+title: Shadow API 版本与行为差分
+category: access
 status: current
 last_reviewed: 2026-09
+purpose: 发现版本漂移、旧 APK/SDK endpoint 与 deprecated 接口的鉴权与行为差异。
+triggers:
+- API 版本漂移
+- v1/v2
+- legacy endpoint
+- deprecated
+inputs:
+- 接口清单
+- 旧客户端产物
+outputs:
+- 新旧差分证据
+related:
+- api-security-review.md
+- mobile-api-apk-discovery-2026.md
 sources:
-  - murrtada/bug-bounty-agent-skills:hunt-shadow-api
-  - OWASP API Security Top 10 2023 API9
+- murrtada/bug-bounty-agent-skills:hunt-shadow-api
+- OWASP API Security Top 10 2023 API9
 ---
 
 # Shadow / Zombie API 资产与差分审查 2026

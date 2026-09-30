@@ -1,3 +1,26 @@
+---
+id: xss
+title: XSS 与前端执行上下文
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 按上下文选择与变形 payload，追到存储型与特权上下文，而非轮询固定清单。
+triggers:
+- 回显
+- 富文本
+- DOM
+- 存储型
+- 前端上下文
+inputs:
+- 可控输入点
+- 输出上下文
+outputs:
+- XSS 执行证据或 N/A
+related:
+- csp-bypass-test.md
+- csrf-test.md
+---
+
 > 短表「XSS → RCE」「自定义协议 → RCE」用标题搜。英文附件 / polyglot 百科已砍；冷门事件和特权上下文仍留。
 > **下面这些 payload 只是加速，不是清单。** 现场按上下文自己选、自己变；表上没有的编码/事件/标签照样打。禁止只轮询本节收过的那几条。
 
@@ -13,7 +36,7 @@
 | 反射型 | payload 在 URL 参数中，需诱导点击 |
 | DOM 型 | 纯前端处理，不经过服务端 |
 
-打穿了按 `vuln-report-format` 定级，不按存储/反射/DOM 抬级。
+打穿了按 `rules/06-reporting.md` 定级，不按存储/反射/DOM 抬级。
 
 ---
 

@@ -1,7 +1,26 @@
-# Web Cache 现代安全基线（2026）
+---
+id: cache-modern
+title: Web Cache 现代基线（2026）
+category: platform
+status: current
+last_reviewed: 2026-09
+purpose: cache-poisoning-test.md 的现代 companion，聚焦 cache/CDN/代理/origin 对 URL 与参数的规范化一致性。
+triggers:
+- CDN
+- 共享缓存
+- SSR cache
+- cache key
+- cache deception
+inputs:
+- 缓存拓扑与规范化规则
+outputs:
+- 缓存边界 Finding
+related:
+- cache-poisoning-test.md
+- nextjs-ssr-security-2026.md
+---
 
-> status: current  
-> last_reviewed: 2026-09
+# Web Cache 现代安全基线（2026）
 
 本专题作为 `cache-poisoning-test.md` 的现代化 companion。传统 unkeyed header 与 cache deception 知识继续保留；现代重点是 cache、CDN、reverse proxy 与 origin 对 URL/路径/查询参数的规范化是否一致。
 

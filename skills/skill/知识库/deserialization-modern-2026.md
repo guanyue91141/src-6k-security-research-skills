@@ -1,7 +1,24 @@
-# 反序列化现代安全基线（2026）
+---
+id: deserialization-modern
+title: 反序列化现代基线（2026）
+category: injection
+status: current
+last_reviewed: 2026-09
+purpose: deserialization-test.md 的现代 companion，聚焦不可信数据是否仍进入通用反序列化器及运行时过滤机制。
+triggers:
+- artifact
+- 缓存或队列对象
+- 通用反序列化器
+- 过滤机制
+inputs:
+- 序列化协议与版本
+outputs:
+- 现代反序列化边界 Finding
+related:
+- deserialization-test.md
+---
 
-> status: current  
-> last_reviewed: 2026-09
+# 反序列化现代安全基线（2026）
 
 本专题作为 `deserialization-test.md` 的现代化 companion。旧文件中的 Java/PHP/Python 历史案例继续保留；新系统审查优先关注“是否仍允许不可信数据进入通用对象反序列化器”和运行时提供的过滤机制。
 

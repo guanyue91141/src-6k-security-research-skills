@@ -1,3 +1,26 @@
+---
+id: api-security-review
+title: API 安全建模与授权审查
+category: access
+status: current
+last_reviewed: 2026-09
+purpose: 建立「身份—对象—动作—租户—数据」五维模型并用最小影响验证边界。
+triggers:
+- REST
+- OpenAPI
+- 微服务接口
+- 接口平台
+inputs:
+- API 文档或抓包
+outputs:
+- 五维模型
+- 边界 Finding
+related:
+- idor-test.md
+- shadow-api-inventory-2026.md
+- grpc-security-2026.md
+---
+
 # API Security Review
 
 面向授权安全评估、代码审计与上线前检查的 API 安全专题。目标不是机械扫描，而是建立“身份—对象—动作—租户—数据”五维模型，并用最小影响方式验证边界是否正确。

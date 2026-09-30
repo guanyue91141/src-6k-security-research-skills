@@ -1,4 +1,27 @@
-> 写不写只认 `~/.grok/rules/vuln-report-format.md`。进站有会话时最低探针见 `dig-scope` §4.2.3（加字段、跳步、领取/库存/券并发一枪）。本篇是测法：支付/流程/验证码都测；发码/滑块没进号就转认证链，别停半截。
+---
+id: logic
+title: 业务逻辑缺陷
+category: logic
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖支付/流程/验证码中的跳步、加字段与并发领取等逻辑缺陷。
+triggers:
+- 支付
+- 订单流程
+- 验证码
+- 领取
+- 库存
+- 优惠券
+inputs:
+- 业务流程与请求序列
+outputs:
+- 逻辑差分证据
+related:
+- business-state-machine-security-2026.md
+- race-condition-test.md
+---
+
+> 写不写只认 `rules/06-reporting.md`。进站有会话时最低探针见 `rules/05-testing-policy.md`（加字段、跳步、领取/库存/券并发一枪）。本篇是测法：支付/流程/验证码都测；发码/滑块没进号就转认证链，别停半截。
 > 短表「商家促销绑定」在 §1.4。英文 business-logic / CHECKLIST / METHODOLOGY / SCENARIOS 附件已砍；支付/流程/验证码测法仍在上半。
 
 ---

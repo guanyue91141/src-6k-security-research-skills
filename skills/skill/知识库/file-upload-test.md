@@ -1,4 +1,27 @@
-> 写不写只认 `~/.grok/rules/vuln-report-format.md`。本篇是测法：别停在能传能下，跟可执行/路径/SSRF/跨用户业务对象。
+---
+id: file-upload
+title: 文件上传与对象存储边界
+category: injection
+status: mixed
+last_reviewed: 2026-09
+purpose: 追到跨用户业务对象、可执行/路径/SSRF 链，而非停在能传能下。
+triggers:
+- 上传点
+- 头像
+- 附件
+- 导入
+- 对象存储
+inputs:
+- 上传接口
+- 存储位置
+outputs:
+- 越权/执行链证据
+related:
+- path-traversal-lfi-test.md
+- ssrf-test.md
+---
+
+> 写不写只认 `rules/06-reporting.md`。本篇是测法：别停在能传能下，跟可执行/路径/SSRF/跨用户业务对象。
 > 短表指针用标题搜。PHP 马 / GIFAR / ImageTragick / 英文附件已砍；没对象存储不要空打跨桶。
 
 # 文件上传漏洞测试手册
@@ -164,4 +187,3 @@
 
 假点：`pass_word` 是哈希抄了登不进；空密 View 已经出文件（那是无提取码分享，不是这枪）。单站没中不删短表这行。
 密钥实值、完整 JS 不进本篇。
-

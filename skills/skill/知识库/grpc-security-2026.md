@@ -1,9 +1,26 @@
 ---
+id: grpc-security
+title: gRPC/Protobuf 服务安全
+category: access
 status: current
 last_reviewed: 2026-09
+purpose: 审查方法级授权、transcoding 与 gRPC-Web/Connect 网关的鉴权断层。
+triggers:
+- gRPC
+- Protobuf
+- grpc-web
+- Connect
+- transcoding
+inputs:
+- proto 定义或反射输出
+outputs:
+- 方法级越权证据
+related:
+- api-security-review.md
+- http2-attacks-test.md
 sources:
-  - murrtada/bug-bounty-agent-skills:hunt-grpc
-  - OWASP API Security Top 10 2023
+- murrtada/bug-bounty-agent-skills:hunt-grpc
+- OWASP API Security Top 10 2023
 ---
 
 # gRPC / Protobuf 安全审查 2026

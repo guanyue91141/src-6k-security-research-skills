@@ -1,3 +1,25 @@
+---
+id: el-injection
+title: 表达式语言注入（EL/SpEL/OGNL）
+category: injection
+status: legacy
+last_reviewed: 2026-09
+purpose: 覆盖 Java 系表达式注入的探测与沙箱逃逸路径。
+triggers:
+- EL
+- SpEL
+- OGNL
+- 模板表达式
+- Java
+inputs:
+- 表达式可控参数
+outputs:
+- 表达式执行证据
+related:
+- injection-test.md
+- jndi-injection-test.md
+---
+
 # expression-language-injection
 
 # Expression Language Injection

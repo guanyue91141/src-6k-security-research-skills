@@ -1,6 +1,27 @@
+---
+id: websocket
+title: WebSocket 安全
+category: protocol
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖握手、Origin、CSWSH 与越权消息；仅 Origin 缺失不构成结论。
+triggers:
+- WebSocket
+- CSWSH
+- Origin
+- Socket.IO
+inputs:
+- WS 端点与会话
+outputs:
+- 越权/注入证据或 N/A
+related:
+- csrf-test.md
+- api-security-review.md
+---
+
 > 结构：上半原有是主线（握手 / Origin / CSWSH / 注入）；下半补充加深（走私、Socket.IO）。短表没点名时先握手+越权消息。
 >
-> 与 `src-value-hunting` 冲突时以 rules 为准。仅 Origin 缺失、没有读到/改到他人数据 → 默认不写。
+> 与 `rules/06-reporting.md` 冲突时以 rules 为准。仅 Origin 缺失、没有读到/改到他人数据 → 默认不写。
 
 ## 一、原有知识库
 

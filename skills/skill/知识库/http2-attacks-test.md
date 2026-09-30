@@ -1,7 +1,26 @@
-# HTTP/2 / HTTP/3 安全审查（2026）
+---
+id: http2-attacks
+title: HTTP/2 与 HTTP/3 安全审查
+category: protocol
+status: current
+last_reviewed: 2026-09
+purpose: 把 H2/H3 与前端的协议转换本身纳入架构审查。
+triggers:
+- HTTP/2
+- HTTP/3
+- h2c
+- 协议转换
+- 代理
+inputs:
+- 协议栈与代理配置
+outputs:
+- 协议层 Finding
+related:
+- http-desync-modern-2026.md
+- grpc-security-2026.md
+---
 
-> status: current  
-> last_reviewed: 2026-09
+# HTTP/2 / HTTP/3 安全审查（2026）
 
 本专题不再只作为“请求走私教材的跳转页”。2026 年应把 HTTP/2、HTTP/3 与 HTTP/1.1 上游之间的协议转换本身纳入架构审查。
 

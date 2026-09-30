@@ -1,6 +1,28 @@
+---
+id: http-smuggling
+title: HTTP 请求走私（经典）
+category: protocol
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 CL.TE/TE.CL 与解析差，先时间差确认再走私。
+triggers:
+- 走私
+- CL.TE
+- TE.CL
+- Transfer-Encoding
+- 解析差
+inputs:
+- 前后端解析差异
+outputs:
+- 走私证据
+related:
+- http-desync-modern-2026.md
+- http2-attacks-test.md
+---
+
 > 结构：上半原有是主线（CL.TE / TE.CL）；下半补充 + 文末附件加深 H2。先时间差确认再走私。
 >
-> 与 `src-value-hunting` 冲突时以 rules 为准。只能探到解析差、没有绕 WAF/劫持/投毒 → 默认不写。
+> 与 `rules/06-reporting.md` 冲突时以 rules 为准。只能探到解析差、没有绕 WAF/劫持/投毒 → 默认不写。
 
 ## 一、原有知识库
 

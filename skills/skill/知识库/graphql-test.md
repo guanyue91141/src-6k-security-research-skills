@@ -1,6 +1,27 @@
+---
+id: graphql-test
+title: GraphQL 经典测试
+category: access
+status: mixed
+last_reviewed: 2026-09
+purpose: 覆盖 introspection、字段授权、批量查询与注入的经典手法。
+triggers:
+- GraphQL
+- introspection
+- query
+- mutation
+inputs:
+- GraphQL 端点
+outputs:
+- 字段越权/注入证据
+related:
+- graphql-modern-2026.md
+- api-security-review.md
+---
+
 > 结构：上半原有是主线；下半补充加深。短表没点名时按现场：自省 / 越权 id / 注入 / 批量。不必整篇通读。
 >
-> 写不写只认 `~/.grok/rules/vuln-report-format.md`。Introspection 仅 schema、无敏感字段 → 继续挖字段/越权/注入。
+> 写不写只认 `rules/06-reporting.md`。Introspection 仅 schema、无敏感字段 → 继续挖字段/越权/注入。
 
 ## 一、原有知识库
 

@@ -1,9 +1,26 @@
 ---
+id: mobile-api-apk-discovery
+title: 移动端 APK/IPA 接口发现
+category: recon
 status: current
 last_reviewed: 2026-09
+purpose: 从 APK/IPA 与 deep link 中恢复 mobile-only/legacy endpoint，再联动授权专题。
+triggers:
+- APK
+- IPA
+- deep link
+- mobile API
+- SDK
+inputs:
+- APK/IPA 包
+outputs:
+- 活跃 endpoint 清单
+related:
+- shadow-api-inventory-2026.md
+- api-security-review.md
 sources:
-  - https://mas.owasp.org/MASTG-TEST-0233/
-  - https://mas.owasp.org/
+- https://mas.owasp.org/MASTG-TEST-0233/
+- https://mas.owasp.org/
 ---
 
 # Mobile API / APK Endpoint Discovery 2026

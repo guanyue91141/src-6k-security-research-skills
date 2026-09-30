@@ -1,3 +1,25 @@
+---
+id: type-juggling
+title: 弱类型比较绕过（PHP Type Juggling）
+category: auth
+status: legacy
+last_reviewed: 2026-09
+purpose: 证明服务端分支把不等值密钥/令牌经类型强制视为相等。
+triggers:
+- PHP
+- 弱比较
+- magic hash
+- token 校验
+inputs:
+- 校验接口
+- 令牌参数
+outputs:
+- 弱比较绕过证据
+related:
+- authbypass-test.md
+- injection-test.md
+---
+
 # type-juggling
 
 # PHP Type Juggling — Weak Comparison & Magic Hash Bypass

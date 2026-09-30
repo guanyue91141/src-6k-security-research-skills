@@ -1,10 +1,31 @@
+---
+id: agent-tool-exec
+title: 对话口工具真实执行
+category: platform
+status: mixed
+last_reviewed: 2026-09
+purpose: 仅在确认真实工具执行边界后，验证「身份口拦了、对话口仍接」的执行差。
+triggers:
+- 工具执行
+- 对话口
+- 命令执行
+- 身份拦截
+inputs:
+- 对话口与工具列表
+outputs:
+- 工具执行证据
+related:
+- llm-security-test.md
+- cloud-ide-codex-rce-chain.md
+---
+
 # 对话口工具真执行
 
 > 短表指针。认的是「身份口拦了、对话口仍接、工具列表里有会跑命令的工具」。  
 > **不是**越狱 / 提示词（别开 `llm-security-test.md` 当开场）。  
 > **不是**云 IDE 弱口令 + `command/exec` RPC（那套见 `cloud-ide-codex-rce-chain.md`）。  
 > 未授权读历史见 `idor-test.md`「助手历史未授权读他人任务」（正文只在那一篇）。  
-> 写不写只认 `vuln-report-format.md`。命令只做无害标记 / `id`。
+> 写不写只认 `rules/06-reporting.md`。命令只做无害标记 / `id`。
 
 ## 认什么
 
